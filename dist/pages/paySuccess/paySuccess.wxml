@@ -1,0 +1,13 @@
+<!-- style: PS_ -->
+<view class="{{style.PS_paySuccess}}">
+	<view class="{{style.PS_title}}">
+		<icon class="{{style.PS_icon}}" type="success" size="{{70}}"/>
+		<view class="{{style.PS_title}}">充值成功</view>
+	</view>
+
+	<view class="{{style.PS_money}}">
+		充值金额 
+		<text class="{{style.fr}}"> ￥{{ money }} </text>
+	</view>
+	<button type="primary" bindtap="complete">完成</button>
+</view>

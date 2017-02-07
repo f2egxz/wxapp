@@ -1,0 +1,145 @@
+<!--带有指示表示的标题提示-->
+<template name="listHintTitle">
+  <!--title ( String )-->
+  <view class="list_hint bgc-ac">
+    <view class="list_hint_icon ac">{{title}}</view>
+  </view>
+</template>
+
+
+<!--商品详情列表-->
+<template name="goodsList">
+  <!--image ( String )
+      goodsName ( string )
+      price ( String [133积分])
+      destroy ( String or Number)
+      gross ( String or Number)
+  -->
+  <view class="pw pyd5 bb">
+    <view class="flex-con mt1">
+      <view class="flex-start-row goods-list__image">
+        <view class="goods-list__imagebox flex-center-row">
+          <image src="{{image}}" class="goods-list__imagecontainer" mode="scaleToFill"></image>
+        </view>
+      </view>
+      <view class="flex-auto">
+        <view>{{ goodsName }}</view>
+        <view class="flex-con mt1 fzd75">
+          <view style="width: 50%;">{{price}}</view>
+          <view class="fac"><text class="fac">已兑：{{destroy}}/{{gross}}份</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--设置列表-->
+<template name="rowListItem">
+  <!--
+    imagePath (String) 图标路径
+    text      (String) 标题文字
+    rightIconPath (String) 右边图标路径一般为箭头
+  -->
+  <view hover="true" hover-class="view-hover" class="flex-con py1 bb pw fac">
+    <view class="flex-start mrd5">
+      <image class="size1" src="{{imagePath}}" mode="scaleToFill"></image>
+    </view>
+    <view class="flex-auto tl">
+      {{text}}
+    </view>
+    <view class="felx-end-row">
+      <image class="size1" src="{{rightIconPath}}" mode="scaleToFill"></image>
+    </view>
+  </view>
+</template>
+
+<!--圆形居中图片-->
+<template name="positionCenterRoundImage">
+  <!--
+    image (String) 居中头像路径
+  -->
+  <view class="w100 tc">
+    <view class="mt2 round_image__con dib">
+      <image src="{{image}}" class="w100" mode="scaleToFill"></image>
+    </view>
+  </view>
+</template>
+
+
+<!--金币收益列表item-->
+<template name="goleTypeItem">
+  <!--
+       date       (String) 时间
+       type       (String) 金币类型
+       quantity   (String) 数量
+  -->
+  <view class="flex-con p1">
+    <view class="flex-start-row">{{date}}</view>
+    <view class="flex-auto">
+      <view class="flex-con">
+        <view class="flex-start-row flex-auto">{{source}}</view>
+        <view class="flex-end-row">{{number}}</view>
+      </view>
+      <view>
+        {{type}}
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--现金列表item-->
+<template name="rechargeInfoList">
+  <!--
+       moneyNum       (String) 现金数量
+       moneyItemType  (String) 现金类型
+       time           (String) 具体操作时间
+  -->
+  <view class="bb pyd5 flex-center-row">
+    <view class="w50">
+      <view>
+        <text>{{moneyNum}}</text>
+        <text class="ml1 fzd8">{{moneyItemType}}</text>
+      </view>
+      <view>
+        <view class="fzd8">{{time}}</view>
+      </view>
+    </view>
+    <view class="w50 fzd8">
+      {{moneyCommint}}
+    </view>
+  </view>
+</template>
+
+<!--author:gxz-->
+<!-- 页面导航 居中 图标 名字-->
+<!-- param: project：{array}  //[Object,Object...] -->
+<!--        Object: icon : {url} ,
+                    name:{string},
+                    url: {url} //要跳转到的页面地址-->
+<!-- TODO 样式还没有引入 -->
+<template name="navSkip">
+  <view class="project">
+    <view data-url="{{item.url}}" wx:for="{{project}}" wx:key="{{item.key}}" class="pro-item">
+      <navigator url="{{item.url}}" hover-class="Project_active">
+        <view class="pro-imgbox">
+          <image src="{{item.icon}}" class="pro-img"></image>
+        </view>
+        <view class="pro-text">{{item.name}}</view>
+      </navigator>
+    </view>
+  </view>
+</template>
+
+<!--author:gxz-->
+<!--部分的标题  -->
+<!--@param: title:{String}  -->
+<template name="articalTitle">
+  <view class="artical-title">
+    <view class="artical-icon"></view>
+    <text class="artical-fl">{{title}}</text>
+  </view>
+</template>
+
+
+
+

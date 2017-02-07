@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/paySuccess/paySuccess",
+    "pages/classPage/classPage"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "wxapp",
+    "navigationBarTextStyle":"black"
+  }
+}

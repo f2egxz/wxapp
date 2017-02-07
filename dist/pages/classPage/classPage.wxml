@@ -1,0 +1,28 @@
+<!--pages/ZclassPage/classPage.wxml-->
+<import src="../common/template.html" />
+<view class="flex_box classpage">
+	<view class="flex-none tabTitle  clearfix">
+        <view class="tabTitle_name">
+            <view class="tabTitle_list {{ showTab == 'Gold' ? 'active' : '' }}"  bindtap="showGold">金币</view>
+            <view class="tabTitle_list {{ showTab == 'Integral' ? 'active' : '' }}" bindtap="showIntegral">积分</view>
+        </view>
+        <view class="flex-none clearfix">
+            <view class="showTab fl" hidden="{{showTab !=='Gold'}}"></view>
+            <view class="showTab fr" hidden="{{showTab !=='Integral'}}"></view>
+        </view>
+    </view>
+    <view class="tabContent">
+        <scroll-view class="tabContent_list" scroll-y="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" hidden="{{showTab !=='Gold'}}" >
+            <view wx:if="{{ColdCommodity.length===0}}">没有商品</view>
+            <view data-id="{{item.goodsName}}" wx:for="{{ColdCommodity}}" wx:key="{{item.goodsName}}" bindtap="tapSkip" >
+                <template is="goodsList" data="{{...item}}"></template>
+            </view>
+        </scroll-view>
+        <scroll-view class="tabContent_list" scroll-y="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top=""  hidden="{{showTab !=='Integral'}}" >
+            <view wx:if="{{IntegralCommodity.length===0}}">没有商品</view>
+            <view data-id="{{item.goodsName}}" wx:for="{{IntegralCommodity}}" wx:key="{{item.goodsName}}" bindtap="tapSkip" >
+                <template is="goodsList" data="{{...item}}"></template>
+            </view>
+        </scroll-view>
+    </view>
+</view>

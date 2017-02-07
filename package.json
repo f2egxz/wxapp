@@ -1,0 +1,38 @@
+{
+  "name": "wxapp-example",
+  "version": "0.0.1",
+  "description": "wxapp file struct",
+  "main": "index.js",
+  "repository": {},
+  "author": "Rabbit <yfhj1990@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.2.0",
+    "wxapp-redux": "^0.0.0-rc.9"
+  },
+  "scripts": {
+    "start": "bash scripts/start",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-jest": "^18.0.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "extract-text-webpack-plugin": "2.0.0-rc.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
+    "rabbitpack": "^0.0.2-rc.10",
+    "redux-mock-store": "^1.2.2",
+    "redux-test-reducer": "^0.1.0",
+    "webpack": "2.2.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  }
+}

@@ -1,0 +1,99 @@
+/*-----common start-------*/
+page {
+	height: 100%;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix:before,  .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+/*-----common end-------*/
+
+
+/*-----index start-------*/
+/*-----index end-------*/
+
+/*-------payPage start---------*/
+.payPage {
+	height: 100%;
+	background-color: #eee;
+}
+
+.P_content {
+	width: 650rpx;
+	height: 300px;
+	background-color: #fff;
+	margin: 0 auto;
+	padding: 0 50rpx;
+	box-sizing: border-box;
+}
+
+.P_way {
+	background-color: #fbfbfb;
+	/*height: 50px;*/
+	line-height: 40px;
+	margin: 0 -50rpx;
+	padding: 0 50rpx;
+}
+
+.P_wayList {
+	padding-left: 110px;
+}
+
+.P_money {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+	height: 60px;
+}
+
+.P_sign {
+	font-size: 30px;
+	margin-right: 10px; 
+}
+
+.P_input {
+	font-size: 50px;
+	height: 50px;
+}
+
+/*-------payPage end---------*/
+
+/*-------paySuccess start--------*/
+.PS_paySuccess {
+	height: 100%;
+	background-color: #ddd;
+}
+
+.PS_icon {
+	margin: 30px auto 0 ;
+}
+
+.PS_title {
+	padding: 10px;
+	text-align: center;
+	font-size: 22px;
+}
+
+.PS_money{
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 16px;
+	margin-bottom: 20px;
+}
+
+
+/*-------paySuccess end--------*/

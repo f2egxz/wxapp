@@ -1,0 +1,99 @@
+/*-----common start-------*/
+page {
+	height: 100%;
+}
+
+._1RmnMEWYX3zXqHv73yWlHr {
+  float: left;
+}
+
+._1FrGN0JH01KeGeZ15UQ0o2 {
+  float: right;
+}
+
+._1GzNUVvtnRqkaZQY0lqYFk:before,  ._1GzNUVvtnRqkaZQY0lqYFk:after {
+  content: "";
+  display: table;
+}
+._1GzNUVvtnRqkaZQY0lqYFk:after {
+  clear: both;
+}
+._1GzNUVvtnRqkaZQY0lqYFk {
+  zoom: 1;
+}
+/*-----common end-------*/
+
+
+/*-----index start-------*/
+/*-----index end-------*/
+
+/*-------payPage start---------*/
+._3Mxu7Md0OLNlaaCEaeYb0c {
+	height: 100%;
+	background-color: #eee;
+}
+
+._2DF1hyC6HGzIbdCUKL7mkn {
+	width: 650rpx;
+	height: 300px;
+	background-color: #fff;
+	margin: 0 auto;
+	padding: 0 50rpx;
+	box-sizing: border-box;
+}
+
+.dQ1vCbt4ZBCw7o3-W1QGJ {
+	background-color: #fbfbfb;
+	/*height: 50px;*/
+	line-height: 40px;
+	margin: 0 -50rpx;
+	padding: 0 50rpx;
+}
+
+.s2kFeRIrh2-I-9TBmR1Qf {
+	padding-left: 110px;
+}
+
+._3feFPVCVC6bo0cdpAWX8mC {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+	height: 60px;
+}
+
+.aj5UMO6-TlO5MNRbXYCem {
+	font-size: 30px;
+	margin-right: 10px; 
+}
+
+._3UY3GEC_lDrSE4l79xMf0s {
+	font-size: 50px;
+	height: 50px;
+}
+
+/*-------payPage end---------*/
+
+/*-------paySuccess start--------*/
+._27YLax_0asXkLwjwU8uPkv {
+	height: 100%;
+	background-color: #ddd;
+}
+
+._2ZH6fpYkadq2SJ-jq1qcjw {
+	margin: 30px auto 0 ;
+}
+
+._3LxmeSPlVDXd6PIFSK9-pe {
+	padding: 10px;
+	text-align: center;
+	font-size: 22px;
+}
+
+._3fMnglyBdBSfl-uiRFEWKy{
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 16px;
+	margin-bottom: 20px;
+}
+
+
+/*-------paySuccess end--------*/
