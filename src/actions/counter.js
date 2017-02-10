@@ -1,5 +1,5 @@
 import http from '../util/http'
-import { randomString,orderNum } from '../util/util'
+import { randomString} from '../util/util'
 
 export const ActionType = {
   WEICHAT:"weichat",

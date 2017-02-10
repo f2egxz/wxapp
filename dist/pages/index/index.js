@@ -1726,6 +1726,7 @@ function weichatPayment(chargeMoney) {
 	var successRes = function successRes(response) {
 		// const response = JSON.parse(response);
 		if (response.success) {
+			// TODO 内部代码的测试
 			var nonceString = (0, _util.randomString)(31);
 			var prepay_id = response.result.prepay_id;
 			var paySign = response.result.paySign;
@@ -1761,12 +1762,10 @@ function weichatPayment(chargeMoney) {
 						(0, _http2.default)({
 							url: '',
 							data: 'cancel',
-							success: wx.showModal({
+							success: wx.showToast({
 								title: '支付取消',
-								content: '支付已取消！',
-								showCancel: false,
-								success: function success() {},
-								fail: function fail() {}
+								icon: 'success',
+								duration: 1000
 							}),
 							fail: function fail() {}
 						});
@@ -1774,13 +1773,7 @@ function weichatPayment(chargeMoney) {
 						(0, _http2.default)({
 							url: '',
 							data: response.requestPayment,
-							success: wx.showModal({
-								title: '支付失败',
-								content: '支付失败，请重试！',
-								showCancel: false,
-								success: function success() {},
-								fail: function fail() {}
-							}),
+							success: resError(),
 							fail: function fail() {}
 						});
 					}

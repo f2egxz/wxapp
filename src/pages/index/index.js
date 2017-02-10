@@ -3,7 +3,7 @@ import { connect } from 'wxapp-redux'
 import * as action from '../../actions/counter'
 import style from '../../styles/counter.css'
 import http from '../../util/http'
-import { randomString,orderNum } from '../../util/util'
+import { randomString } from '../../util/util'
 
 function mapStateToProps(state) {
 	return {
@@ -67,6 +67,7 @@ function weichatPayment(chargeMoney) {
 	const successRes = (response)=>{
 		// const response = JSON.parse(response);
 		if(response.success) {
+			// TODO 内部代码的测试
 			const nonceString = randomString(31)
 			const prepay_id = response.result.prepay_id;
 			const paySign = response.result.paySign;
@@ -102,12 +103,10 @@ function weichatPayment(chargeMoney) {
 						http({
 							url:'',
 							data:'cancel',
-							success:wx.showModal({
-										title: '支付取消',
-										content: '支付已取消！',
-										showCancel: false,
-										success: function() {},
-										fail: function() {}
+							success:wx.showToast({
+									  title: '支付取消',
+									  icon: 'success',
+									  duration: 1000
 									}),
 							fail:()=>{}
 						})
@@ -115,13 +114,7 @@ function weichatPayment(chargeMoney) {
 						http({
 							url:'',
 							data:response.requestPayment,
-							success:wx.showModal({
-										title: '支付失败',
-										content: '支付失败，请重试！',
-										showCancel: false,
-										success: function() {},
-										fail: function() {}
-									}),
+							success:resError(),
 							fail:()=>{}
 						})
 					}
