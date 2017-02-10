@@ -4,7 +4,9 @@ Fetch.prototype.success = function(call) {
   var data;
   if(this.url === '/userdata') {
     data = {
-      balance: 3
+      balance: 3,
+      success:true,
+      msg:'fail'
     }
   }
 
@@ -15,7 +17,7 @@ Fetch.prototype.error = function(call) {
   var data;
   if(this.url === '/userdata') {
     data = {
-      balance: 3
+      balance: 0,
     }
   }
 
@@ -31,18 +33,13 @@ var fetch = (options) => new Fetch(options)
   * @param {fn} fnS 成功之后的函数
   * @param {fn} fnF 失败之后的函数
   */
-export default function http(options, fnS,fnF){
-  if(wx){
-    const url = {
-      url:options,
-      success:fnS,
-      fail:fnF
-    }
+export default function http(options){
+  if(!wx){
     wx.request(url)
   }else{
-    fetch(options)
-    .success(fnS)
-      .error(fnF)
+    fetch(options.url)
+    .success(options.success)
+      // .error(options.fail)
     return this
   }
 

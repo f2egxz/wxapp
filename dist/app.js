@@ -820,9 +820,11 @@ exports.chargeMoney = chargeMoney;
 exports.submit = submit;
 exports.payStartHttp = payStartHttp;
 
-var _http = __webpack_require__(39);
+var _http = __webpack_require__(40);
 
 var _http2 = _interopRequireDefault(_http);
+
+var _util = __webpack_require__(41);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -871,14 +873,15 @@ function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
     var _getState$pay = getState().pay,
         balance = _getState$pay.balance,
         chargeMoney = _getState$pay.chargeMoney,
-        payWay = _getState$pay.payWay;
+        payWay = _getState$pay.payWay,
+        userName = _getState$pay.userName;
 
     console.log(getState());
     if (chargeMoney > 0) {
       if (payWay === ActionType.FUNDS) {
         balance >= chargeMoney ? function () {
           verify(dispatch, true);
-          fundsPayment(chargeMoney);
+          fundsPayment(chargeMoney, userName);
         }() : function () {
           notMoney();
           verify(dispatch, false);
@@ -923,10 +926,14 @@ function payStartHttp(reqError) {
   return function (dispatch) {
     dispatch(payStartREQ());
     _this.dispatch = dispatch;
-    return (0, _http2.default)('/userdata', function (response) {
-      return dispatch(payStartREQ_SUCCESS(response.balance));
-    }, function (response) {
-      return dispatch(payStartREQ_ERROR(reqError));
+    return (0, _http2.default)({
+      url: '/userdata',
+      success: function success(response) {
+        return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
+      },
+      fail: function fail(response) {
+        return dispatch(payStartREQ_ERROR(reqError));
+      }
     });
   };
 }
@@ -1781,7 +1788,7 @@ var initState = exports.initState = {
 	balance: 100,
 	verify: false,
 	ratio: 5,
-	user: ''
+	userName: ''
 };
 
 exports.default = function () {
@@ -1811,7 +1818,8 @@ exports.default = function () {
 			});
 		case _counter.ActionType.HTTPREQ_SUCCESS:
 			return Object.assign({}, state, {
-				ratio: payload
+				ratio: payload.ratio,
+				userName: payload.userName
 			});
 		case _counter.ActionType.HTTPREQ_ERROR:
 			return Object.assign({}, state, {
@@ -1855,7 +1863,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1873,7 +1882,9 @@ Fetch.prototype.success = function (call) {
   var data;
   if (this.url === '/userdata') {
     data = {
-      balance: 3
+      balance: 3,
+      success: true,
+      msg: 'fail'
     };
   }
 
@@ -1884,7 +1895,7 @@ Fetch.prototype.error = function (call) {
   var data;
   if (this.url === '/userdata') {
     data = {
-      balance: 3
+      balance: 0
     };
   }
 
@@ -1901,19 +1912,45 @@ var fetch = function fetch(options) {
   * @param {fn} fnS 成功之后的函数
   * @param {fn} fnF 失败之后的函数
   */
-function http(options, fnS, fnF) {
-  if (wx) {
-    var url = {
-      url: options,
-      success: fnS,
-      fail: fnF
-    };
+function http(options) {
+  if (!wx) {
     wx.request(url);
   } else {
-    fetch(options).success(fnS).error(fnF);
+    fetch(options.url).success(options.success);
+    // .error(options.fail)
     return this;
   }
 }
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.randomString = randomString;
+exports.orderNum = orderNum;
+exports.signature = signature;
+var string = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+function randomString(n) {
+    var tmp = "";
+    for (var i = 0; i < n; i++) {
+        var id = Math.floor(Math.random() * 36);
+        tmp += string[id];
+    }
+    return tmp;
+}
+
+function orderNum() {
+    var date = new Date(Date.now());
+    return date.toLocaleString().replace(/\D/g, '');
+}
+
+function signature() {}
 
 /***/ })
 /******/ ]);

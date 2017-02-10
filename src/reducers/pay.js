@@ -8,7 +8,7 @@ export const initState = {
 	balance:100,
 	verify:false,
 	ratio:5,
-	user: ''
+	userName: ''
 };
 
 export default (state = initState, action) => {
@@ -34,7 +34,8 @@ export default (state = initState, action) => {
 			});
 		case ActionType.HTTPREQ_SUCCESS:
 			return Object.assign({},state,{
-				ratio:payload
+				ratio:payload.ratio,
+				userName: payload.userName
 			});
 		case ActionType.HTTPREQ_ERROR:
 			return Object.assign({},state,{

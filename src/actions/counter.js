@@ -1,4 +1,5 @@
-import http from './http'
+import http from '../util/http'
+import { randomString,orderNum } from '../util/util'
 
 export const ActionType = {
   WEICHAT:"weichat",
@@ -48,13 +49,13 @@ const verify = (dispatch, verify)=>{
   */
 export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
   return  (dispatch,getState) => {
-    const { balance, chargeMoney,payWay } = getState().pay
+    const { balance, chargeMoney,payWay,userName } = getState().pay
     console.log(getState())
     if(chargeMoney>0){
       if(payWay===ActionType.FUNDS){
         balance>=chargeMoney?function(){
           verify(dispatch ,true);
-          fundsPayment(chargeMoney);
+          fundsPayment(chargeMoney,userName);
         }()
         :function(){
           notMoney();
@@ -104,7 +105,11 @@ export function payStartHttp(reqError){
   return (dispatch) => {
     dispatch(payStartREQ())
     this.dispatch = dispatch
-    return http('/userdata',response=>dispatch(payStartREQ_SUCCESS(response.balance)),response => dispatch(payStartREQ_ERROR(reqError)))
+    return http({
+      url:'/userdata',
+      success:response=>dispatch(payStartREQ_SUCCESS({userName:response.username,ratio:response.balance})),
+      fail:response => dispatch(payStartREQ_ERROR(reqError))
+    })
   }
 }
 
