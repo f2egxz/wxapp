@@ -18,6 +18,7 @@
 				</radio-group>
 			</view>
 		</view>
+		<view>充值比例：￥1兑换{{ratio}}金币</view>
 		<view>充值金额</view>
 		<form>
 			<view class="{{style.P_money}}">

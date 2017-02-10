@@ -1,8 +1,13 @@
+import http from './http'
+
 export const ActionType = {
   WEICHAT:"weichat",
   FUNDS:"funds",
   CHANGEMONEY:"changeMoney",
-  VERIFY:"verify"
+  VERIFY:"verify",
+  HTTPREQ:"http_requert",
+  HTTPREQ_SUCCESS:"http_requert_success",
+  HTTPREQ_ERROR:"http_requert_error"
 };
 
 export function payWay(event) {
@@ -16,7 +21,7 @@ export function chargeMoney(e) {
     const value = e.detail.value
   	dispatch({
   		type:ActionType.CHANGEMONEY,
-    	money: value
+    	payload: value
   	})
   	return value
   }
@@ -27,7 +32,7 @@ export function chargeMoney(e) {
 const verify = (dispatch, verify)=>{
   dispatch({
      type: ActionType.VERIFY,
-     verify:verify
+     payload:verify
   })
 }
 
@@ -44,6 +49,7 @@ const verify = (dispatch, verify)=>{
 export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
   return  (dispatch,getState) => {
     const { balance, chargeMoney,payWay } = getState().pay
+    console.log(getState())
     if(chargeMoney>0){
       if(payWay===ActionType.FUNDS){
         balance>=chargeMoney?function(){
@@ -62,6 +68,43 @@ export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
       errMoney();
       verify (dispatch,false)
     }
+  }
+}
+
+
+
+
+// 页面加载时的请求
+const payStartREQ = () => {
+  return {
+    type:ActionType.HTTPREQ
+  }
+}
+
+const payStartREQ_SUCCESS = (response) => {
+  return {
+    type:ActionType.HTTPREQ_SUCCESS,
+    payload:response
+  }
+}
+
+function payStartREQ_ERROR(reqError) {
+  return (dispatch)=>{
+    reqError();
+    dispatch({
+      type:ActionType.HTTPREQ_ERROR
+    })
+  }
+}
+
+
+
+
+export function payStartHttp(reqError){
+  return (dispatch) => {
+    dispatch(payStartREQ())
+    this.dispatch = dispatch
+    return http('/userdata',response=>dispatch(payStartREQ_SUCCESS(response.balance)),response => dispatch(payStartREQ_ERROR(reqError)))
   }
 }
 

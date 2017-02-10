@@ -26,6 +26,6 @@ describe('actions',()=>{
 		expect(dispatch(Action.chargeMoney(event))).toEqual('1')
 	})
 	it('submit action',()=>{
-		
+
 	})
 })
