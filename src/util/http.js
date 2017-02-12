@@ -1,46 +1,43 @@
-function Fetch(url) { this.url = url }
-
-Fetch.prototype.success = function(call) {
-  var data;
-  if(this.url === '/userdata') {
-    data = {
-      balance: 3,
-      success:true,
-      msg:'fail'
-    }
-  }
-
-  call(data)
-  return this;
-}
-Fetch.prototype.error = function(call) {
-  var data;
-  if(this.url === '/userdata') {
-    data = {
-      balance: 0,
-    }
-  }
-
-  call(data)
-  return this;
-}
-
-var fetch = (options) => new Fetch(options)
-
+import fetch from 'isomorphic-fetch'
 
 /**
-  * @param {String} url 请求地址
-  * @param {fn} fnS 成功之后的函数
-  * @param {fn} fnF 失败之后的函数
+  * @param {Obj} options 传入的对象
   */
 export default function http(options){
-  if(!wx){
-    wx.request(url)
-  }else{
-    fetch(options.url)
-    .success(options.success)
-      // .error(options.fail)
+  // if(wx){
+  //   wx.request(options)
+  // }else{
+  //   const init = {
+  //     method:options.method||'GET',
+  //     body:JSON.stringify(options.data||'')
+  //   }
+  //   fetch(options.url,init)
+  //     .then(response => {
+  //       if (response.status >= 400) {
+  //           throw new Error("Bad response from server");
+  //       }
+  //       return response.json()
+  //     })
+  //     .then(options.success||function(response){console.log(response)})
+  //     .catch(options.fail||function(response){console.log(response)})
+  //   return this
+  // }
+  try{
+    wx.request(options)
+  }catch(e){
+    const init = {
+      method:options.method||'GET',
+      body:JSON.stringify(options.data||'')
+    }
+    fetch(options.url,init)
+      .then(response => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json()
+      })
+      .then(options.success||function(response){console.log(response)})
+      .catch(options.fail||function(response){console.log(response)})
     return this
   }
-
 }

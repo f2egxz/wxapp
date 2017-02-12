@@ -8,12 +8,8 @@ export function randomString(n) {
     return tmp;
 }
 
-export function orderNum (){
-	const date = new Date(Date.now())
-	return date.toLocaleString().replace(/\D/g,'')
-}
-
-export function signature(){
-
-}
+// export function orderNum (){
+// 	const date = new Date(Date.now())
+// 	return date.toLocaleString().replace(/\D/g,'')
+// }
 

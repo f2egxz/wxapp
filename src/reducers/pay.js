@@ -7,6 +7,7 @@ export const initState = {
 	chargeMoney:'',
 	balance:100,
 	verify:false,
+	StartHttp:false,
 	ratio:5,
 	userName: ''
 };
@@ -32,13 +33,19 @@ export default (state = initState, action) => {
 				verify:payload,
 				chargeMoney:'',
 			});
+		case ActionType.HTTPREQ:
+			return Object.assign({},state,{
+				StartHttp:true,
+			});
 		case ActionType.HTTPREQ_SUCCESS:
 			return Object.assign({},state,{
+				StartHttp:false,
 				ratio:payload.ratio,
 				userName: payload.userName
 			});
 		case ActionType.HTTPREQ_ERROR:
 			return Object.assign({},state,{
+				StartHttp:false,
 				ratio:'*'
 			})
 		default:

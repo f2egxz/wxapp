@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">31.82% </span>
+        <span class="strong">47.06% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/22</span>
+        <span class='fraction'>16/34</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.5% </span>
+        <span class="strong">56.25% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/8</span>
+        <span class='fraction'>9/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">31.82% </span>
+        <span class="strong">47.06% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/22</span>
+        <span class='fraction'>16/34</span>
       </div>
     </div>
   </div>
@@ -111,7 +111,59 @@
 66
 67
 68
-69</td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,11 +231,57 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const ActionType = {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import http from '../util/http'
+import { randomString} from '../util/util'
+&nbsp;
+export const ActionType = {
   WEICHAT:"weichat",
   FUNDS:"funds",
   CHANGEMONEY:"changeMoney",
-  VERIFY:"verify"
+  VERIFY:"verify",
+  HTTPREQ:"http_requert",
+  HTTPREQ_SUCCESS:"http_requert_success",
+  HTTPREQ_ERROR:"http_requert_error"
 };
 &nbsp;
 export function payWay(event) {
@@ -197,7 +295,7 @@ export function chargeMoney(e) {
     const value = e.detail.value
   	dispatch({
   		type:ActionType.CHANGEMONEY,
-    	money: value
+    	payload: value
   	})
   	return value
   }
@@ -208,7 +306,7 @@ export function chargeMoney(e) {
 const verify = <span class="fstat-no" title="function not covered" >(d</span>ispatch, verify)=&gt;{
 <span class="cstat-no" title="statement not covered" >  dispatch({</span>
      type: ActionType.VERIFY,
-     verify:verify
+     payload:verify
   })
 }
 &nbsp;
@@ -224,12 +322,12 @@ const verify = <span class="fstat-no" title="function not covered" >(d</span>isp
   */
 export function <span class="fstat-no" title="function not covered" >submit(</span>fundsPayment,weichatPayment,notMoney,errMoney) {
 <span class="cstat-no" title="statement not covered" >  return  <span class="fstat-no" title="function not covered" >(d</span>ispatch,getState) =&gt; {</span>
-    const { balance, chargeMoney,payWay } = <span class="cstat-no" title="statement not covered" >getState().pay</span>
+    const { balance, chargeMoney,payWay,userName } = <span class="cstat-no" title="statement not covered" >getState().pay</span>
 <span class="cstat-no" title="statement not covered" >    if(chargeMoney&gt;0){</span>
 <span class="cstat-no" title="statement not covered" >      if(payWay===ActionType.FUNDS){</span>
 <span class="cstat-no" title="statement not covered" >        balance&gt;=chargeMoney?<span class="fstat-no" title="function not covered" >fu</span>nction(){</span>
 <span class="cstat-no" title="statement not covered" >          verify(dispatch ,true);</span>
-<span class="cstat-no" title="statement not covered" >          fundsPayment(chargeMoney);</span>
+<span class="cstat-no" title="statement not covered" >          fundsPayment(chargeMoney,userName);</span>
         }()
         :<span class="fstat-no" title="function not covered" >fu</span>nction(){
 <span class="cstat-no" title="statement not covered" >          notMoney();</span>
@@ -247,13 +345,53 @@ export function <span class="fstat-no" title="function not covered" >submit(</sp
 }
 &nbsp;
 &nbsp;
+&nbsp;
+&nbsp;
+// 页面加载时的请求
+const payStartREQ = () =&gt; {
+  return {
+    type:ActionType.HTTPREQ
+  }
+}
+&nbsp;
+const payStartREQ_SUCCESS = <span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    type:ActionType.HTTPREQ_SUCCESS,
+    payload:response
+  }
+}
+&nbsp;
+function payStartREQ_ERROR(reqError) {
+  return (dispatch)=&gt;{
+    reqError();
+<span class="cstat-no" title="statement not covered" >    dispatch({</span>
+      type:ActionType.HTTPREQ_ERROR
+    })
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
+export function payStartHttp(reqError){
+  return (dispatch) =&gt; {
+    dispatch(payStartREQ())
+    return http({
+      url:'/userdata',
+      success:<span class="fstat-no" title="function not covered" >re</span>sponse=&gt;<span class="cstat-no" title="statement not covered" >dispatch(payStartREQ_SUCCESS({userName:response.username,ratio:response.balance})),</span>
+      fail:response =&gt; dispatch(payStartREQ_ERROR(reqError))
+    })
+  }
+}
+&nbsp;
+&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 07 2017 15:23:03 GMT+0800 (中国标准时间)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Feb 12 2017 16:24:58 GMT+0800 (中国标准时间)
 </div>
 </div>
 <script src="..\prettify.js"></script>

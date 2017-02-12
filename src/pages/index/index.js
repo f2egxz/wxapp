@@ -27,6 +27,7 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
+/*零钱支付*/
 function fundsPayment(chargeMoney,userName) {
 	wx.showToast({
 		title: '支付中',
@@ -62,8 +63,8 @@ function fundsPayment(chargeMoney,userName) {
 	})
 }
 
+// 微信支付
 function weichatPayment(chargeMoney) {
-	//TODO 调用微信支付的API
 	const successRes = (response)=>{
 		// const response = JSON.parse(response);
 		if(response.success) {
@@ -118,7 +119,6 @@ function weichatPayment(chargeMoney) {
 							fail:()=>{}
 						})
 					}
-
 				},
 				fail:     (response)=>{
 					wx.showModal({
@@ -142,6 +142,7 @@ function weichatPayment(chargeMoney) {
 			})
 		}
 	}
+	//第一次给后台发送请求
 	http({
 		url:'/userdata',
 		data:{userName:'',money:chargeMoney},
@@ -183,8 +184,8 @@ function reqError() {
 
 function resError(){
 	wx.showModal({
-		title: '支付失败',
-		content: '支付失败请重新支付',
+		title: '充值失败',
+		content: '充值失败请重新支付',
 		showCancel: false,
 		success: function() {},
 		fail: function() {}

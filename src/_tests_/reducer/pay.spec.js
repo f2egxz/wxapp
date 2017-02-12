@@ -10,15 +10,9 @@ describe("teest reducer pay page ",()=>{
 		assertReducer({
 			from:{
 					payWay:"funds",
-					chargeMoney:'',
-					balance:100,
-					verify:false
 				 },
 			to:{
 					payWay:"weichat",
-					chargeMoney:'',
-					balance:100,
-					verify:false
 				},
 			action: {type: ActionType.WEICHAT}
 		})
@@ -26,16 +20,10 @@ describe("teest reducer pay page ",()=>{
 	it("pay way is 'funds'",()=>{
 		assertReducer({
 			from:{
-					payWay:"funds",
-					chargeMoney:'',
-					balance:100,
-					verify:false
+					payWay:"weichat",
 				 },
 			to:{
 					payWay:"funds",
-					chargeMoney:'',
-					balance:100,
-					verify:false
 				},
 			action: {type: ActionType.FUNDS}
 		})
@@ -43,40 +31,101 @@ describe("teest reducer pay page ",()=>{
 	it("pay money is '3'",()=>{
 		assertReducer({
 			from:{
-					payWay:"funds",
 					chargeMoney:'',
-					balance:100,
-					verify:false
 				 },
 			to:{
-					payWay:"funds",
 					chargeMoney:'3',
-					balance:100,
-					verify:false
 				},
 			action: {
 				type: ActionType.CHANGEMONEY,
-				money:'3'
+				payload:'3'
 			}
 		})
 	}),
 	it("pay verify is true",()=>{
 		assertReducer({
 			from:{
+					verify:false,
+					chargeMoney:'3'
+				 },
+			to:{
+					verify:true,
+					chargeMoney:''
+				},
+			action: {
+				type: ActionType.VERIFY,
+				payload: true
+			}
+		})
+	})
+	it("async startHttp action",()=>{
+		assertReducer({
+			from:{
+					StartHttp:false
+				 },
+			to:{
+					StartHttp:true
+				},
+			action: {
+				type: ActionType.HTTPREQ,
+			}
+		})
+	})
+	it("async startHttp success action",()=>{
+		assertReducer({
+			from:{
+					StartHttp:true,
+					ratio:'',
+					userName: ''
+				 },
+			to:{
+					StartHttp:false,
+					ratio:5,
+					userName: 'gxz'
+				},
+			action: {
+				type:ActionType.HTTPREQ_SUCCESS,
+				payload:{userName:'gxz',ratio:5}
+			}
+		})
+	})
+	it("async startHttp fail action",()=>{
+		assertReducer({
+			from:{
+					StartHttp:false,
+					ratio:5
+				 },
+			to:{
+					StartHttp:false,
+					ratio:'*'
+				},
+			action: {
+				type:ActionType.HTTPREQ_ERROR
+			}
+		})
+	})
+	it('default action',()=>{
+		assertReducer({
+			from:{
 					payWay:"funds",
 					chargeMoney:'',
 					balance:100,
-					verify:false
+					verify:false,
+					StartHttp:false,
+					ratio:5,
+					userName: ''
 				 },
 			to:{
 					payWay:"funds",
 					chargeMoney:'',
 					balance:100,
-					verify:true
+					verify:false,
+					StartHttp:false,
+					ratio:5,
+					userName: ''
 				},
 			action: {
-				type: ActionType.VERIFY,
-				verify: true
+				type:'other'
 			}
 		})
 	})

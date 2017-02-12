@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for reducers/pay.js</title>
+    <title>Code coverage report for util/http.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="..\prettify.css" />
     <link rel="stylesheet" href="..\base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\index.html">All files</a> / <a href="index.html">reducers</a> pay.js
+      <a href="..\index.html">All files</a> / <a href="index.html">util</a> http.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/11</span>
+        <span class='fraction'>6/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/9</span>
+        <span class='fraction'>8/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>11/11</span>
+        <span class='fraction'>6/10</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -86,22 +86,7 @@
 41
 42
 43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+44</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -112,99 +97,81 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { combineReducers } from 'redux';
-import { ActionType }	   from "../actions/counter"
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fetch from 'isomorphic-fetch'
 &nbsp;
-&nbsp;
-export const initState = {
-	payWay:"funds",
-	chargeMoney:'',
-	balance:100,
-	verify:false,
-	StartHttp:false,
-	ratio:5,
-	userName: ''
-};
-&nbsp;
-export default (state = <span class="branch-0 cbranch-no" title="branch not covered" >initState,</span> action) =&gt; {
-	const { type, payload } = action
-	switch (type){
-		case ActionType.WEICHAT:
-			return Object.assign({},state,{
-				payWay:"weichat"
-			});
-		case ActionType.FUNDS:
-			return Object.assign({},state,{
-				payWay:"funds"
-			});
-		case ActionType.CHANGEMONEY:
-			return Object.assign({},state,{
-				chargeMoney:payload
-			});
-&nbsp;
-		case ActionType.VERIFY:
-			return Object.assign({},state,{
-				verify:payload,
-				chargeMoney:'',
-			});
-		case ActionType.HTTPREQ:
-			return Object.assign({},state,{
-				StartHttp:true,
-			});
-		case ActionType.HTTPREQ_SUCCESS:
-			return Object.assign({},state,{
-				StartHttp:false,
-				ratio:payload.ratio,
-				userName: payload.userName
-			});
-		case ActionType.HTTPREQ_ERROR:
-			return Object.assign({},state,{
-				StartHttp:false,
-				ratio:'*'
-			})
-		default:
-			return state;
-	}
-};
+/**
+  * @param {Obj} options 传入的对象
+  */
+export default function http(options){
+  // if(wx){
+  //   wx.request(options)
+  // }else{
+  //   const init = {
+  //     method:options.method||'GET',
+  //     body:JSON.stringify(options.data||'')
+  //   }
+  //   fetch(options.url,init)
+  //     .then(response =&gt; {
+  //       if (response.status &gt;= 400) {
+  //           throw new Error("Bad response from server");
+  //       }
+  //       return response.json()
+  //     })
+  //     .then(options.success||function(response){console.log(response)})
+  //     .catch(options.fail||function(response){console.log(response)})
+  //   return this
+  // }
+  try{
+    wx.request(options)
+  }catch(e){
+    const init = {
+      method:options.method||'GET',
+      body:JSON.stringify(options.data||'')
+    }
+    fetch(options.url,init)
+      .then(<span class="fstat-no" title="function not covered" >re</span>sponse =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (response.status &gt;= 400) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Bad response from server");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return response.json()</span>
+      })
+      .then(options.success||<span class="fstat-no" title="function not covered" >fu</span>nction(response){<span class="cstat-no" title="statement not covered" >console.log(response)}</span>)
+      .catch(options.fail||function(response){console.log(response)})
+    return this
+  }
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

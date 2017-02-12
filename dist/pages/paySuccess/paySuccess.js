@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("../../lib/wxapp-redux"));
+		module.exports = factory(require("../../lib/wxapp-redux"), require("lib/isomorphic-fetch"));
 	else if(typeof define === 'function' && define.amd)
-		define(["../../lib/wxapp-redux"], factory);
+		define(["../../lib/wxapp-redux", "lib/isomorphic-fetch"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux")) : factory(root["../../lib/wxapp-redux"]);
+		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux"), require("lib/isomorphic-fetch")) : factory(root["../../lib/wxapp-redux"], root["lib/isomorphic-fetch"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_25__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_27__, __WEBPACK_EXTERNAL_MODULE_28__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -820,11 +820,11 @@ exports.chargeMoney = chargeMoney;
 exports.submit = submit;
 exports.payStartHttp = payStartHttp;
 
-var _http = __webpack_require__(40);
+var _http = __webpack_require__(24);
 
 var _http2 = _interopRequireDefault(_http);
 
-var _util = __webpack_require__(41);
+var _util = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -876,7 +876,6 @@ function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
         payWay = _getState$pay.payWay,
         userName = _getState$pay.userName;
 
-    console.log(getState());
     if (chargeMoney > 0) {
       if (payWay === ActionType.FUNDS) {
         balance >= chargeMoney ? function () {
@@ -920,12 +919,10 @@ function payStartREQ_ERROR(reqError) {
   };
 }
 
+// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
 function payStartHttp(reqError) {
-  var _this = this;
-
   return function (dispatch) {
     dispatch(payStartREQ());
-    _this.dispatch = dispatch;
     return (0, _http2.default)({
       url: '/userdata',
       success: function success(response) {
@@ -1611,21 +1608,111 @@ module.exports = function (module) {
 
 /***/ }),
 /* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = http;
+
+var _isomorphicFetch = __webpack_require__(28);
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+  * @param {Obj} options 传入的对象
+  */
+function http(options) {
+  // if(wx){
+  //   wx.request(options)
+  // }else{
+  //   const init = {
+  //     method:options.method||'GET',
+  //     body:JSON.stringify(options.data||'')
+  //   }
+  //   fetch(options.url,init)
+  //     .then(response => {
+  //       if (response.status >= 400) {
+  //           throw new Error("Bad response from server");
+  //       }
+  //       return response.json()
+  //     })
+  //     .then(options.success||function(response){console.log(response)})
+  //     .catch(options.fail||function(response){console.log(response)})
+  //   return this
+  // }
+  try {
+    wx.request(options);
+  } catch (e) {
+    var init = {
+      method: options.method || 'GET',
+      body: JSON.stringify(options.data || '')
+    };
+    (0, _isomorphicFetch2.default)(options.url, init).then(function (response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    }).then(options.success || function (response) {
+      console.log(response);
+    }).catch(options.fail || function (response) {
+      console.log(response);
+    });
+    return this;
+  }
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.randomString = randomString;
+var string = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+function randomString(n) {
+    var tmp = "";
+    for (var i = 0; i < n; i++) {
+        var id = Math.floor(Math.random() * 36);
+        tmp += string[id];
+    }
+    return tmp;
+}
+
+// export function orderNum (){
+// 	const date = new Date(Date.now())
+// 	return date.toLocaleString().replace(/\D/g,'')
+// }
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_wayList":"s2kFeRIrh2-I-9TBmR1Qf","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy"};
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_25__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
 
 /***/ }),
-/* 26 */,
-/* 27 */,
-/* 28 */,
+/* 28 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_28__;
+
+/***/ }),
 /* 29 */,
 /* 30 */,
 /* 31 */,
@@ -1635,7 +1722,10 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_25__;
 /* 35 */,
 /* 36 */,
 /* 37 */,
-/* 38 */
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1643,13 +1733,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_25__;
 
 var _redux = __webpack_require__(4);
 
-var _wxappRedux = __webpack_require__(25);
+var _wxappRedux = __webpack_require__(27);
 
 var _counter = __webpack_require__(8);
 
 var action = _interopRequireWildcard(_counter);
 
-var _counter2 = __webpack_require__(24);
+var _counter2 = __webpack_require__(26);
 
 var _counter3 = _interopRequireDefault(_counter2);
 
@@ -1676,96 +1766,6 @@ function mapDispatchToProps(dispatch) {
 		});
 	}
 }, _counter3.default);
-
-/***/ }),
-/* 39 */,
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = http;
-function Fetch(url) {
-  this.url = url;
-}
-
-Fetch.prototype.success = function (call) {
-  var data;
-  if (this.url === '/userdata') {
-    data = {
-      balance: 3,
-      success: true,
-      msg: 'fail'
-    };
-  }
-
-  call(data);
-  return this;
-};
-Fetch.prototype.error = function (call) {
-  var data;
-  if (this.url === '/userdata') {
-    data = {
-      balance: 0
-    };
-  }
-
-  call(data);
-  return this;
-};
-
-var fetch = function fetch(options) {
-  return new Fetch(options);
-};
-
-/**
-  * @param {String} url 请求地址
-  * @param {fn} fnS 成功之后的函数
-  * @param {fn} fnF 失败之后的函数
-  */
-function http(options) {
-  if (!wx) {
-    wx.request(url);
-  } else {
-    fetch(options.url).success(options.success);
-    // .error(options.fail)
-    return this;
-  }
-}
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.randomString = randomString;
-exports.orderNum = orderNum;
-exports.signature = signature;
-var string = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-function randomString(n) {
-    var tmp = "";
-    for (var i = 0; i < n; i++) {
-        var id = Math.floor(Math.random() * 36);
-        tmp += string[id];
-    }
-    return tmp;
-}
-
-function orderNum() {
-    var date = new Date(Date.now());
-    return date.toLocaleString().replace(/\D/g, '');
-}
-
-function signature() {}
 
 /***/ })
 /******/ ]);

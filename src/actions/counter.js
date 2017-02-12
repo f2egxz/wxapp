@@ -50,7 +50,6 @@ const verify = (dispatch, verify)=>{
 export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
   return  (dispatch,getState) => {
     const { balance, chargeMoney,payWay,userName } = getState().pay
-    console.log(getState())
     if(chargeMoney>0){
       if(payWay===ActionType.FUNDS){
         balance>=chargeMoney?function(){
@@ -100,11 +99,10 @@ function payStartREQ_ERROR(reqError) {
 
 
 
-
+// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
 export function payStartHttp(reqError){
   return (dispatch) => {
     dispatch(payStartREQ())
-    this.dispatch = dispatch
     return http({
       url:'/userdata',
       success:response=>dispatch(payStartREQ_SUCCESS({userName:response.username,ratio:response.balance})),
