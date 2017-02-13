@@ -1,6 +1,6 @@
 import testReducer 		from 'redux-test-reducer'
 import pay			 	from "../../reducers/pay"
-import { ActionType }	from "../../actions/counter"
+import { ActionType }	from "../../actions/action"
 
 
 const assertReducer = testReducer(pay)
@@ -14,18 +14,10 @@ describe("teest reducer pay page ",()=>{
 			to:{
 					payWay:"weichat",
 				},
-			action: {type: ActionType.WEICHAT}
-		})
-	}),
-	it("pay way is 'funds'",()=>{
-		assertReducer({
-			from:{
-					payWay:"weichat",
-				 },
-			to:{
-					payWay:"funds",
-				},
-			action: {type: ActionType.FUNDS}
+			action: {
+				type: ActionType.PAYWAY,
+				payload: "weichat"
+			}
 		})
 	}),
 	it("pay money is '3'",()=>{

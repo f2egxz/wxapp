@@ -1,14 +1,13 @@
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import * as Action from './../../actions/counter'
+import * as Action from './../../actions/action'
 
 const mockStore = configureMockStore([ thunkMiddleware ])
 
 describe('actions',()=>{
 	it('ActionType test',()=>{
 		const expectedAction = {
-			WEICHAT:"weichat",
-			FUNDS:"funds",
+			PAYWAY:"payWay",
 			CHANGEMONEY:"changeMoney",
 			VERIFY:"verify",
 			HTTPREQ:"http_requert",
@@ -19,21 +18,14 @@ describe('actions',()=>{
 	})
 	it('payWay action',()=>{
 		const expectedAction = {
-    		type: Action.ActionType.WEICHAT
+    		type: Action.ActionType.PAYWAY,
+    		payload:'funds'
   		}
-  		const event = {
-  			detail:{
-  				value:Action.ActionType.WEICHAT
-  			}
-  		}
+  		const event = 'funds'
   		expect(Action.payWay(event)).toEqual(expectedAction)
 	})
 	it('chargeMoney action',()=>{
-		const event = {
-			detail:{
-  				value:'1'
-  			}
-		}
+		const event = '1'
 		const expectedAction = {
 			type:Action.ActionType.CHANGEMONEY,
 			payload:'1'

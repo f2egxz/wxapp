@@ -35,24 +35,19 @@ page {
 
 ._2DF1hyC6HGzIbdCUKL7mkn {
 	width: 650rpx;
-	height: 300px;
 	background-color: #fff;
 	margin: 0 auto;
-	padding: 0 50rpx;
+	padding:0 50rpx 50rpx;
 	box-sizing: border-box;
 }
 
 .dQ1vCbt4ZBCw7o3-W1QGJ {
 	background-color: #fbfbfb;
-	/*height: 50px;*/
 	line-height: 40px;
 	margin: 0 -50rpx;
 	padding: 0 50rpx;
 }
 
-.s2kFeRIrh2-I-9TBmR1Qf {
-	padding-left: 110px;
-}
 
 ._3feFPVCVC6bo0cdpAWX8mC {
 	border-bottom: 1px solid #ccc;

@@ -2,27 +2,17 @@
 <view class="{{style.payPage}}">
 	<view class="{{style.P_content}}">
 		<view class="{{style.P_way}}">
-			充值方式：{{payWay==="weichat"?"微信支付":"余额支付"}}
-			<view class="{{style.P_wayList}}">
-				<radio-group class="radio-group" bindchange="bindRadioGroupCheck">
-					<view>
-						<label>
-							<radio value="{{weichat}}" checked="{{payWay===weichat}}"/>微信支付
-						</label>
-					</view>
-					<view>
-						<label>
-							<radio value="{{funds}}" checked="{{payWay===funds}}"/>余额支付
-						</label>
-					</view>
-				</radio-group>
-			</view>
+			<picker bindchange="bindPickerChange" value="{{0}}" range="{{['余额支付','微信支付']}}">
+			    <view>
+			      充值方式：{{payWay==="weichat"?"微信支付":"余额支付"}}
+			    </view>
+			</picker>
 		</view>
 		<view>充值比例：￥1兑换{{ratio}}金币</view>
 		<view>充值金额</view>
 		<form>
 			<view class="{{style.P_money}}">
-				<text class="{{style.fl}} {{style.P_sign}}"> ￥ </text>
+				<text class="{{style .fl}} {{style.P_sign}}"> ￥ </text>
 				<input class="{{style.P_input}}" bindinput="bindKeyInput" type="number" placeholder="" focus  value="{{money}}" />
 			</view>
 			<button type="primary" bindtap="bindSubmit">确认充值</button>

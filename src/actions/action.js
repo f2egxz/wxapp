@@ -2,8 +2,7 @@ import http from '../util/http'
 import { randomString} from '../util/util'
 
 export const ActionType = {
-  WEICHAT:"weichat",
-  FUNDS:"funds",
+  PAYWAY:"payWay",
   CHANGEMONEY:"changeMoney",
   VERIFY:"verify",
   HTTPREQ:"http_requert",
@@ -11,15 +10,15 @@ export const ActionType = {
   HTTPREQ_ERROR:"http_requert_error"
 };
 
-export function payWay(event) {
+export function payWay(payway) {
   return {
-    type: event.detail.value
+    type: ActionType.PAYWAY,
+    payload: payway
   }
 };
 
-export function chargeMoney(e) {
+export function chargeMoney(value) {
   return (dispatch) => {
-    const value = e.detail.value
   	dispatch({
   		type:ActionType.CHANGEMONEY,
     	payload: value
@@ -51,7 +50,7 @@ export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
   return  (dispatch,getState) => {
     const { balance, chargeMoney,payWay,userName } = getState().pay
     if(chargeMoney>0){
-      if(payWay===ActionType.FUNDS){
+      if(payWay==='funds'){
         balance>=chargeMoney?function(){
           verify(dispatch ,true);
           fundsPayment(chargeMoney,userName);
@@ -60,7 +59,7 @@ export function submit(fundsPayment,weichatPayment,notMoney,errMoney) {
           notMoney();
           verify (dispatch,false)
         }()
-      }else if(payWay===ActionType.WEICHAT){
+      }else if(payWay==='weichat'){
         weichatPayment(chargeMoney);
         verify(dispatch,true);
       }
@@ -104,7 +103,7 @@ export function payStartHttp(reqError){
   return (dispatch) => {
     dispatch(payStartREQ())
     return http({
-      url:'/userdata',
+      url:'/userdata_start',
       success:response=>dispatch(payStartREQ_SUCCESS({userName:response.username,ratio:response.balance})),
       fail:response => dispatch(payStartREQ_ERROR(reqError))
     })

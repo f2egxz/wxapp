@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("../../lib/wxapp-redux"), require("lib/isomorphic-fetch"));
+		module.exports = factory(require("../../lib/wxapp-redux"));
 	else if(typeof define === 'function' && define.amd)
-		define(["../../lib/wxapp-redux", "lib/isomorphic-fetch"], factory);
+		define(["../../lib/wxapp-redux"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux"), require("lib/isomorphic-fetch")) : factory(root["../../lib/wxapp-redux"], root["lib/isomorphic-fetch"]);
+		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux")) : factory(root["../../lib/wxapp-redux"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_27__, __WEBPACK_EXTERNAL_MODULE_28__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_27__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -829,8 +829,7 @@ var _util = __webpack_require__(25);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ActionType = exports.ActionType = {
-  WEICHAT: "weichat",
-  FUNDS: "funds",
+  PAYWAY: "payWay",
   CHANGEMONEY: "changeMoney",
   VERIFY: "verify",
   HTTPREQ: "http_requert",
@@ -838,15 +837,15 @@ var ActionType = exports.ActionType = {
   HTTPREQ_ERROR: "http_requert_error"
 };
 
-function payWay(event) {
+function payWay(payway) {
   return {
-    type: event.detail.value
+    type: ActionType.PAYWAY,
+    payload: payway
   };
 };
 
-function chargeMoney(e) {
+function chargeMoney(value) {
   return function (dispatch) {
-    var value = e.detail.value;
     dispatch({
       type: ActionType.CHANGEMONEY,
       payload: value
@@ -877,7 +876,7 @@ function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
         userName = _getState$pay.userName;
 
     if (chargeMoney > 0) {
-      if (payWay === ActionType.FUNDS) {
+      if (payWay === 'funds') {
         balance >= chargeMoney ? function () {
           verify(dispatch, true);
           fundsPayment(chargeMoney, userName);
@@ -885,7 +884,7 @@ function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
           notMoney();
           verify(dispatch, false);
         }();
-      } else if (payWay === ActionType.WEICHAT) {
+      } else if (payWay === 'weichat') {
         weichatPayment(chargeMoney);
         verify(dispatch, true);
       }
@@ -924,7 +923,7 @@ function payStartHttp(reqError) {
   return function (dispatch) {
     dispatch(payStartREQ());
     return (0, _http2.default)({
-      url: '/userdata',
+      url: '/userdata_start',
       success: function success(response) {
         return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
       },
@@ -1616,56 +1615,107 @@ module.exports = function (module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = http;
 
-var _isomorphicFetch = __webpack_require__(28);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+// import fetch from 'isomorphic-fetch'
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+/*
+* 1. 请求的类型 type get post
+* 2. 请求地址 url
+* 3. 是异步的还是同步的 async false true
+* 4. 请求内容的格式 contentType
+* 5. 传输的数据 data json对象
+*
+* 6.响应成功处理函数 success function
+* 7.响应失败的处理函数 error function
+*
+* 这些都是动态参数 参数对象 options
+* */
+
+// window.$ = {};
+// $.ajax = function(options){
+
+//   if(!options || typeof options != 'object'){
+//     return false;
+//   }
+//   var type = options.method || 'get';
+//   var url = options.url || location.pathname;
+//   var async = true;
+//   var contentType = "text/html";
+//   var data = options.data || {};
+//   var dataStr = ''
+//   for(var key in data){
+//     dataStr += key+'='+data[key]+'&';
+//   }
+//   dataStr = dataStr && dataStr.slice(0,-1);
+
+//   /*ajax 编程*/
+//   var xhr = new XMLHttpRequest();
+//   xhr.open(type,(type=='get'?url+'?'+dataStr:url),async);
+//   if(type == 'post'){
+//     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+//   }
+
+//   /*请求主体*/
+//   需要判断请求类型
+//   xhr.send(type=='get'?null:dataStr);
+
+//   /*监听响应状态的改变 响应状态*/
+//   xhr.onreadystatechange = function(){
+//     if(xhr.readyState == 4 && xhr.status == 200){
+//       /*success*/
+//       var data = '';
+//       var contentType = xhr.getResponseHeader('Content-Type');
+//       if(contentType.indexOf('xml') > -1){
+//         data = xhr.responseXML;
+//       }else if(contentType.indexOf('json') > -1){
+//         data = JSON.parse(xhr.responseText);
+//       }else{
+//         data = xhr.responseText;
+//       }
+//       options.success && options.success(data);
+//     }else if(xhr.readyState == 4){
+//       /*fail*/
+//       options.fail && options.fail('you request fail !');
+//     }
+
+//   }
+// }
+
 
 /**
   * @param {Obj} options 传入的对象
   */
 function http(options) {
-  // if(wx){
+  // try{
   //   wx.request(options)
-  // }else{
-  //   const init = {
-  //     method:options.method||'GET',
-  //     body:JSON.stringify(options.data||'')
-  //   }
-  //   fetch(options.url,init)
-  //     .then(response => {
-  //       if (response.status >= 400) {
-  //           throw new Error("Bad response from server");
-  //       }
-  //       return response.json()
-  //     })
-  //     .then(options.success||function(response){console.log(response)})
-  //     .catch(options.fail||function(response){console.log(response)})
-  //   return this
+  // }catch(e){
+  // const init = {
+  //   method:options.method||'GET',
+  //   body:JSON.stringify(options.data||'')
   // }
-  try {
+  // fetch(options.url,init)
+  //   .then(response => {
+  //     if (response.status >= 400) {
+  //         throw new Error("Bad response from server");
+  //     }
+  //     return response.json()
+  //   })
+  //   .then(options.success||function(response){console.log(response)})
+  //   .catch(options.fail||function(response){console.log(response)})
+  // return this
+  // }
+  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
     wx.request(options);
-  } catch (e) {
-    var init = {
-      method: options.method || 'GET',
-      body: JSON.stringify(options.data || '')
-    };
-    (0, _isomorphicFetch2.default)(options.url, init).then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(options.success || function (response) {
-      console.log(response);
-    }).catch(options.fail || function (response) {
-      console.log(response);
-    });
-    return this;
+  } else {
+    fetch(options);
   }
 }
+// http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
+
+
+exports.default = http;
 
 /***/ }),
 /* 25 */
@@ -1698,7 +1748,7 @@ function randomString(n) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_wayList":"s2kFeRIrh2-I-9TBmR1Qf","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy"};
+module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy"};
 
 /***/ }),
 /* 27 */
@@ -1707,12 +1757,7 @@ module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2",
 module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_28__;
-
-/***/ }),
+/* 28 */,
 /* 29 */,
 /* 30 */,
 /* 31 */,
@@ -1724,8 +1769,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_28__;
 /* 37 */,
 /* 38 */,
 /* 39 */,
-/* 40 */,
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1735,13 +1779,13 @@ var _redux = __webpack_require__(4);
 
 var _wxappRedux = __webpack_require__(27);
 
-var _counter = __webpack_require__(8);
+var _action = __webpack_require__(8);
 
-var action = _interopRequireWildcard(_counter);
+var action = _interopRequireWildcard(_action);
 
-var _counter2 = __webpack_require__(26);
+var _counter = __webpack_require__(26);
 
-var _counter3 = _interopRequireDefault(_counter2);
+var _counter2 = _interopRequireDefault(_counter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1765,7 +1809,7 @@ function mapDispatchToProps(dispatch) {
 			money: options.money
 		});
 	}
-}, _counter3.default);
+}, _counter2.default);
 
 /***/ })
 /******/ ]);

@@ -1,4 +1,4 @@
-import { ActionType } from '../actions/counter'
+import { ActionType } from '../actions/action'
 
 export const initState = {
   value: 5,

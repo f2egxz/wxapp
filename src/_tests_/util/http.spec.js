@@ -6,11 +6,15 @@ const options = {
 }
 
 
-test('http try test',()=>{
-	const wx = { request: mockFunc}
-	expect(http(options))
-})
-test('http catch test',()=>{
-	const fetch = mockFunc
+// test('http try test',()=>{
+// 	const wx = { request: mockFunc}
+// 	expect(http(options))
+// })
+// test('http catch test',()=>{
+// 	const fetch = mockFunc
+// 	expect(http(options))
+// })
+
+test('http test',()=>{
 	expect(http(options))
 })

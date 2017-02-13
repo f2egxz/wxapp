@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ActionType }	   from "../actions/counter"
+import { ActionType }	   from "../actions/action"
 
 
 export const initState = {
@@ -15,13 +15,9 @@ export const initState = {
 export default (state = initState, action) => {
 	const { type, payload } = action
 	switch (type){
-		case ActionType.WEICHAT:
+		case ActionType.PAYWAY:
 			return Object.assign({},state,{
-				payWay:"weichat"
-			});
-		case ActionType.FUNDS:
-			return Object.assign({},state,{
-				payWay:"funds"
+				payWay:payload
 			});
 		case ActionType.CHANGEMONEY:
 			return Object.assign({},state,{

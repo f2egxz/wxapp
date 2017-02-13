@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["redux"], factory);
 	else if(typeof exports === 'object')
-		exports["wxapp-redux"] = factory(require("redux"));
+		exports["WxappRedux"] = factory(require("redux"));
 	else
-		root["wxapp-redux"] = factory(root["redux"]);
+		root["WxappRedux"] = factory(root["redux"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_27__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "//";
+/******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 28);
@@ -78,194 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout() {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-})();
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch (e) {
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch (e) {
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e) {
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e) {
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while (len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () {
-    return '/';
-};
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function () {
-    return 0;
-};
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -348,9 +161,9 @@ function isObject(value) {
 
 module.exports = isFunction;
 
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -362,12 +175,12 @@ var _Symbol = root.Symbol;
 
 module.exports = _Symbol;
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -376,7 +189,7 @@ exports.wrapMapToPropsConstant = wrapMapToPropsConstant;
 exports.getDependsOnOwnProps = getDependsOnOwnProps;
 exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
 
-var _verifyPlainObject = __webpack_require__(4);
+var _verifyPlainObject = __webpack_require__(3);
 
 var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 
@@ -437,7 +250,7 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
         props = proxy(stateOrDispatch, ownProps);
       }
 
-      if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject2.default)(props, displayName, methodName);
+      if (true) (0, _verifyPlainObject2.default)(props, displayName, methodName);
 
       return props;
     };
@@ -445,11 +258,10 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
     return proxy;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -463,7 +275,7 @@ var _isPlainObject = __webpack_require__(17);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _warning = __webpack_require__(5);
+var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -475,9 +287,9 @@ function verifyPlainObject(value, displayName, methodName) {
   }
 }
 
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -508,46 +320,100 @@ function warning(message) {
   /* eslint-enable no-empty */
 }
 
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-			value: true
+    value: true
 });
-exports.default = Provide;
+exports.default = checkEnvironment;
+function checkEnvironment() {
+    if (!wx || !App || !Page || !getApp) {
+        return false;
+    }
 
-var _index = __webpack_require__(1);
+    return true;
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Provider;
+
+var _index = __webpack_require__(0);
 
 var _index2 = _interopRequireDefault(_index);
 
+var _checkEnvironment = __webpack_require__(5);
+
+var _checkEnvironment2 = _interopRequireDefault(_checkEnvironment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * checkStoreShape
+ *
+ * @param {Function} subscribe
+ * @param {Function} dispatch
+ * @param {Function} getState
+ * @return Boolean
+ */
 function checkStoreShape(_ref) {
-			var subscribe = _ref.subscribe,
-			    dispatch = _ref.dispatch,
-			    getState = _ref.getState;
+  var subscribe = _ref.subscribe,
+      dispatch = _ref.dispatch,
+      getState = _ref.getState;
 
-			return (0, _index2.default)(subscribe) && (0, _index2.default)(dispatch) && (0, _index2.default)(getState);
+  return (0, _index2.default)(subscribe) && (0, _index2.default)(dispatch) && (0, _index2.default)(getState);
 }
 
-function Provide(store, options) {
-			if (!checkStoreShape(store)) throw new TypeError('Bad store!');
+/**
+ * Provider
+ *
+ * @param {Function} store = {}
+ * @param {Function} options = {}
+ * @return Boolean
+ */
+function Provider() {
+  var store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-			return function (wxAppOptions) {
-						if (wxAppOptions.store) throw new Error('The `store` key already exist.');
 
-						wxAppOptions.store = store;
-						return App(wxAppOptions);
-			};
+  if (!(0, _checkEnvironment2.default)()) throw new Error('Make sure use wxapp-redux with wx environment.');
+
+  // Check store shape.
+  if (!checkStoreShape(store)) throw new TypeError('Please provide a redux store via `createStore`');
+
+  return function WrapProvider() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var storeKey = options.storeKey;
+
+
+    if (options.store && !storeKey) throw new ReferenceError('The `store` key is already exist, please replace `options.store` to other or given options.storeKey');
+
+    options[storeKey || 'store'] = store;
+
+    // Can't pass options to global.App
+    var WXAPPREDUXEXPORTKEY = '__WXAPPREDUXEXPORT__';
+    var isExport = options[WXAPPREDUXEXPORTKEY];
+    if (isExport) return options;
+
+    return App(options);
+  };
 }
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -639,8 +505,9 @@ function createConnect() {
 	    selectorFactory = _ref$selectorFactory === undefined ? _selectorFactory2.default : _ref$selectorFactory;
 
 	return function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
-		var _ref2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {},
-		    _ref2$pure = _ref2.pure,
+		var _ref2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+		var _ref2$pure = _ref2.pure,
 		    pure = _ref2$pure === undefined ? true : _ref2$pure,
 		    _ref2$areStatesEqual = _ref2.areStatesEqual,
 		    areStatesEqual = _ref2$areStatesEqual === undefined ? strictEqual : _ref2$areStatesEqual,
@@ -684,12 +551,12 @@ function createConnect() {
 
 exports.default = createConnect();
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
+/**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
  *
@@ -711,7 +578,7 @@ exports.default = createConnect();
  * will remain to ensure logic does not differ in production.
  */
 
-var NODE_ENV = process.env.NODE_ENV;
+var NODE_ENV = "development";
 
 var invariant = function invariant(condition, format, a, b, c, d, e, f) {
   if (NODE_ENV !== 'production') {
@@ -739,16 +606,15 @@ var invariant = function invariant(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Symbol = __webpack_require__(2),
+var _Symbol = __webpack_require__(1),
     getRawTag = __webpack_require__(12),
     objectToString = __webpack_require__(13);
 
@@ -775,9 +641,9 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -790,9 +656,9 @@ var freeGlobal = (typeof global === 'undefined' ? 'undefined' : _typeof(global))
 module.exports = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -804,14 +670,14 @@ var getPrototype = overArg(Object.getPrototypeOf, Object);
 
 module.exports = getPrototype;
 
-/***/ },
+/***/ }),
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Symbol = __webpack_require__(2);
+var _Symbol = __webpack_require__(1);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -858,9 +724,9 @@ function getRawTag(value) {
 
 module.exports = getRawTag;
 
-/***/ },
+/***/ }),
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -888,9 +754,9 @@ function objectToString(value) {
 
 module.exports = objectToString;
 
-/***/ },
+/***/ }),
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -911,9 +777,9 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-/***/ },
+/***/ }),
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -930,9 +796,9 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-/***/ },
+/***/ }),
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -969,9 +835,9 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-/***/ },
+/***/ }),
 /* 17 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1038,9 +904,9 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-/***/ },
+/***/ }),
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1057,7 +923,7 @@ exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
 
 var _redux = __webpack_require__(27);
 
-var _wrapMapToProps = __webpack_require__(3);
+var _wrapMapToProps = __webpack_require__(2);
 
 function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
   return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
@@ -1077,9 +943,9 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 
 exports.default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
 
-/***/ },
+/***/ }),
 /* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1090,7 +956,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
 exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
 
-var _wrapMapToProps = __webpack_require__(3);
+var _wrapMapToProps = __webpack_require__(2);
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
   return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
@@ -1104,12 +970,12 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 
 exports.default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
 
-/***/ },
+/***/ }),
 /* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1122,7 +988,7 @@ exports.wrapMergePropsFunc = wrapMergePropsFunc;
 exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
 exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
 
-var _verifyPlainObject = __webpack_require__(4);
+var _verifyPlainObject = __webpack_require__(3);
 
 var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 
@@ -1150,7 +1016,7 @@ function wrapMergePropsFunc(mergeProps) {
         hasRunOnce = true;
         mergedProps = nextMergedProps;
 
-        if (process.env.NODE_ENV !== 'production') (0, _verifyPlainObject2.default)(mergedProps, displayName, 'mergeProps');
+        if (true) (0, _verifyPlainObject2.default)(mergedProps, displayName, 'mergeProps');
       }
 
       return mergedProps;
@@ -1169,14 +1035,13 @@ function whenMergePropsIsOmitted(mergeProps) {
 }
 
 exports.default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
-/***/ },
+/***/ }),
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1283,7 +1148,7 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
   var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
   var mergeProps = initMergeProps(dispatch, options);
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (true) {
     (0, _verifySubselectors2.default)(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
   }
 
@@ -1291,11 +1156,10 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
 
   return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
-/***/ },
+/***/ }),
 /* 22 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1305,7 +1169,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = verifySubselectors;
 
-var _warning = __webpack_require__(5);
+var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -1327,9 +1191,9 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
   verify(mergeProps, 'mergeProps', displayName);
 }
 
-/***/ },
+/***/ }),
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1437,9 +1301,9 @@ var Subscription = function () {
 
 exports.default = Subscription;
 
-/***/ },
+/***/ }),
 /* 24 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1468,9 +1332,9 @@ function shallowEqual(a, b) {
   return countA === countB;
 }
 
-/***/ },
+/***/ }),
 /* 25 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1498,9 +1362,9 @@ try {
 
 module.exports = g;
 
-/***/ },
+/***/ }),
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1513,7 +1377,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = connectAdvance;
 
-var _index = __webpack_require__(1);
+var _index = __webpack_require__(0);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -1525,13 +1389,18 @@ var _Subscription = __webpack_require__(23);
 
 var _Subscription2 = _interopRequireDefault(_Subscription);
 
+var _checkEnvironment = __webpack_require__(5);
+
+var _checkEnvironment2 = _interopRequireDefault(_checkEnvironment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function connectAdvance(selectorFactory) {
-	var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-	    _ref$getDisplayName = _ref.getDisplayName,
+	var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	var _ref$getDisplayName = _ref.getDisplayName,
 	    getDisplayName = _ref$getDisplayName === undefined ? function (name) {
 		return 'ConnectAdvanced(' + name + ')';
 	} : _ref$getDisplayName,
@@ -1551,10 +1420,11 @@ function connectAdvance(selectorFactory) {
 
 	return function wrapWithConnect() {
 		var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-		var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
 
 
-		// A... wtf with the display name, maybe the file path?
+		if (options === null) options = {};
+
 		var wrappedComponentName = options.displayName || options.name || 'Component';
 
 		var displayName = getDisplayName(wrappedComponentName);
@@ -1571,7 +1441,10 @@ function connectAdvance(selectorFactory) {
 			options: options
 		});
 
-		var store = getApp().store;
+		var _getApp = getApp(),
+		    store = _getApp.store,
+		    __WXAPPREDUXEXPORT__ = _getApp.__WXAPPREDUXEXPORT__;
+
 		var dispatch = store.dispatch,
 		    getState = store.getState;
 
@@ -1604,59 +1477,67 @@ function connectAdvance(selectorFactory) {
 			selector.run();
 		};
 
-		// Split props to `this.data` and function to `this`
+		// Split props to `this.data`, make handles to `this`
 		var datas = {};
 		var handles = {};
 
 		Object.keys(selector.props).forEach(function (key) {
-
 			var val = selector.props[key];
 			var sel = !(0, _index2.default)(val) ? datas : handles;
 
 			sel[key] = val;
 		});
 
-		var _options$data = options.data,
+		// If options is a function, call fn with selector and subscription
+		// if(isFunction(options)) return options.call(this, selector.props, function subscribe() {
+		//     subscription.trySubscribe()
+		//     selector.run()
+		// })
+
+		var _options = options,
+		    _options$data = _options.data,
 		    data = _options$data === undefined ? {} : _options$data,
-		    _onLoad = options.onLoad,
-		    _onUnload = options.onUnload;
+		    _onLoad = _options.onLoad,
+		    _onUnload = _options.onUnload;
 
 
-		var mergedData = Object.assign({}, data, datas, {
-			// merge `Style Object` from css modules
-			style: style
-		});
+		var mergedData = Object.assign({},
+		// data of options
+		data,
+		// redux store
+		datas,
+		// merge `Style Object` to `this.data` from css modules
+		style ? { style: style } : {});
 
-		return Page(Object.assign({}, options, handles, {
+		var pageOptions = Object.assign({}, options, handles, {
 			data: mergedData,
 			onLoad: function onLoad() {
 				setData = setData.bind(this);
 				subscription.trySubscribe();
 				selector.run();
-
-				if ((0, _index2.default)(_onLoad)) {
-					_onLoad.apply(this, arguments);
-				}
+				if ((0, _index2.default)(_onLoad)) _onLoad.apply(this, arguments);
 			},
 			onUnload: function onUnload() {
 				if (subscription) subscription.tryUnsubscribe();
-				if ((0, _index2.default)(_onUnload)) {
-					_onUnload.apply(this, arguments);
-				}
+				if ((0, _index2.default)(_onUnload)) _onUnload.apply(this, arguments);
 			}
-		}));
+		});
+
+		if (__WXAPPREDUXEXPORT__) return pageOptions;
+
+		return Page(pageOptions);
 	};
 }
 
-/***/ },
+/***/ }),
 /* 27 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
 
-/***/ },
+/***/ }),
 /* 28 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
@@ -1679,7 +1560,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.Provider = _Provider2.default;
 exports.connect = _connect2.default;
 
-/***/ }
+/***/ })
 /******/ ]);
 });
-//# sourceMappingURL=wxapp-redux.js.map

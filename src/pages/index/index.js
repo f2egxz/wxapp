@@ -1,6 +1,6 @@
 import { compose } from 'redux'
 import { connect } from 'wxapp-redux'
-import * as action from '../../actions/counter'
+import * as action from '../../actions/action'
 import style from '../../styles/counter.css'
 import http from '../../util/http'
 import { randomString } from '../../util/util'
@@ -20,11 +20,17 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		bindRadioGroupCheck: compose(dispatch, action.payWay),
-		bindKeyInput: compose(dispatch, action.chargeMoney),
+		bindPickerChange: (event)=>{
+			const payway = event.detail.value==='0'?'funds':'weichat';
+			dispatch(action.payWay(payway))
+		},
+		bindKeyInput: (event)=>{
+			const value = event.detail.value;
+			dispatch(action.chargeMoney(value))
+		},
 		bindSubmit: () => dispatch(action.submit(fundsPayment, weichatPayment, notMoney, errMoney)),
-		startHttp: () => dispatch(action.payStartHttp(reqError))
-	}
+		startHttp: () => dispatch(action.payStartHttp(reqError)),
+  	}
 }
 
 /*零钱支付*/
@@ -36,7 +42,7 @@ function fundsPayment(chargeMoney,userName) {
 		success: function() {
 			// TODO 调用余额支付的API（传参：ID 金额）
 			http({
-				url:'/userdata',
+				url:'/userdata_funds',
 				data:{
 					userName:userName,
 					money:chargeMoney
@@ -128,7 +134,6 @@ function weichatPayment(chargeMoney) {
 						success: function() {},
 						fail: function() {}
 					});
-
 				},
 				complete: ()=>{}
 			})
@@ -144,7 +149,7 @@ function weichatPayment(chargeMoney) {
 	}
 	//第一次给后台发送请求
 	http({
-		url:'/userdata',
+		url:'/userdata_weichat',
 		data:{userName:'',money:chargeMoney},
 		success:successRes,
 		fail:reqError,

@@ -35,24 +35,19 @@ page {
 
 .P_content {
 	width: 650rpx;
-	height: 300px;
 	background-color: #fff;
 	margin: 0 auto;
-	padding: 0 50rpx;
+	padding:0 50rpx 50rpx;
 	box-sizing: border-box;
 }
 
 .P_way {
 	background-color: #fbfbfb;
-	/*height: 50px;*/
 	line-height: 40px;
 	margin: 0 -50rpx;
 	padding: 0 50rpx;
 }
 
-.P_wayList {
-	padding-left: 110px;
-}
 
 .P_money {
 	border-bottom: 1px solid #ccc;
