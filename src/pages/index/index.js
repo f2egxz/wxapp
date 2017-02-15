@@ -107,6 +107,7 @@ function weichatPayment(chargeMoney) {
 
 						})
 					}else if(response.requestPayment==='fail cancel'){
+						// 用具取消支付
 						http({
 							url:'',
 							data:'cancel',

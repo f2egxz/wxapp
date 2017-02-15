@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("lib/wxapp-redux"), require("lib/redux-logger"), require("lib/redux-thunk")) : factory(root["lib/wxapp-redux"], root["lib/redux-logger"], root["lib/redux-thunk"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_29__, __WEBPACK_EXTERNAL_MODULE_35__, __WEBPACK_EXTERNAL_MODULE_36__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_30__, __WEBPACK_EXTERNAL_MODULE_37__, __WEBPACK_EXTERNAL_MODULE_38__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -814,125 +814,107 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActionType = undefined;
-exports.payWay = payWay;
-exports.chargeMoney = chargeMoney;
-exports.submit = submit;
-exports.payStartHttp = payStartHttp;
 
-var _http = __webpack_require__(24);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _http2 = _interopRequireDefault(_http);
+// import fetch from 'isomorphic-fetch'
 
-var _util = __webpack_require__(25);
+/*
+* 1. 请求的类型 type get post
+* 2. 请求地址 url
+* 3. 是异步的还是同步的 async false true
+* 4. 请求内容的格式 contentType
+* 5. 传输的数据 data json对象
+*
+* 6.响应成功处理函数 success function
+* 7.响应失败的处理函数 error function
+*
+* 这些都是动态参数 参数对象 options
+* */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// window.$ = {};
+// $.ajax = function(options){
 
-var ActionType = exports.ActionType = {
-  PAYWAY: "payWay",
-  CHANGEMONEY: "changeMoney",
-  VERIFY: "verify",
-  HTTPREQ: "http_requert",
-  HTTPREQ_SUCCESS: "http_requert_success",
-  HTTPREQ_ERROR: "http_requert_error"
-};
+//   if(!options || typeof options != 'object'){
+//     return false;
+//   }
+//   var type = options.method || 'get';
+//   var url = options.url || location.pathname;
+//   var async = true;
+//   var contentType = "text/html";
+//   var data = options.data || {};
+//   var dataStr = ''
+//   for(var key in data){
+//     dataStr += key+'='+data[key]+'&';
+//   }
+//   dataStr = dataStr && dataStr.slice(0,-1);
 
-function payWay(payway) {
-  return {
-    type: ActionType.PAYWAY,
-    payload: payway
-  };
-};
+//   /*ajax 编程*/
+//   var xhr = new XMLHttpRequest();
+//   xhr.open(type,(type=='get'?url+'?'+dataStr:url),async);
+//   if(type == 'post'){
+//     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+//   }
 
-function chargeMoney(value) {
-  return function (dispatch) {
-    dispatch({
-      type: ActionType.CHANGEMONEY,
-      payload: value
-    });
-    return value;
-  };
-};
+//   /*请求主体*/
+//   需要判断请求类型
+//   xhr.send(type=='get'?null:dataStr);
 
-var verify = function verify(dispatch, _verify) {
-  dispatch({
-    type: ActionType.VERIFY,
-    payload: _verify
-  });
-};
+//   /*监听响应状态的改变 响应状态*/
+//   xhr.onreadystatechange = function(){
+//     if(xhr.readyState == 4 && xhr.status == 200){
+//       /*success*/
+//       var data = '';
+//       var contentType = xhr.getResponseHeader('Content-Type');
+//       if(contentType.indexOf('xml') > -1){
+//         data = xhr.responseXML;
+//       }else if(contentType.indexOf('json') > -1){
+//         data = JSON.parse(xhr.responseText);
+//       }else{
+//         data = xhr.responseText;
+//       }
+//       options.success && options.success(data);
+//     }else if(xhr.readyState == 4){
+//       /*fail*/
+//       options.fail && options.fail('you request fail !');
+//     }
+
+//   }
+// }
+
 
 /**
-  * @param {func} fundsPayment  零钱支付
-  * @param {func} weichatPayment  微信支付
-  * @param {func} notMoney  没有足够的零钱的时候
-  * @param {func} errMoney  输入的金额有误的时候
+  * @param {Obj} options 传入的对象
   */
-function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
-  return function (dispatch, getState) {
-    var _getState$pay = getState().pay,
-        balance = _getState$pay.balance,
-        chargeMoney = _getState$pay.chargeMoney,
-        payWay = _getState$pay.payWay,
-        userName = _getState$pay.userName;
-
-    if (chargeMoney > 0) {
-      if (payWay === 'funds') {
-        balance >= chargeMoney ? function () {
-          verify(dispatch, true);
-          fundsPayment(chargeMoney, userName);
-        }() : function () {
-          notMoney();
-          verify(dispatch, false);
-        }();
-      } else if (payWay === 'weichat') {
-        weichatPayment(chargeMoney);
-        verify(dispatch, true);
-      }
-    } else {
-      errMoney();
-      verify(dispatch, false);
-    }
-  };
+function http(options) {
+  // try{
+  //   wx.request(options)
+  // }catch(e){
+  // const init = {
+  //   method:options.method||'GET',
+  //   body:JSON.stringify(options.data||'')
+  // }
+  // fetch(options.url,init)
+  //   .then(response => {
+  //     if (response.status >= 400) {
+  //         throw new Error("Bad response from server");
+  //     }
+  //     return response.json()
+  //   })
+  //   .then(options.success||function(response){console.log(response)})
+  //   .catch(options.fail||function(response){console.log(response)})
+  // return this
+  // }
+  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
+    wx.request(options);
+  } else {
+    // fetch(options)
+  }
 }
+// http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
-// 页面加载时的请求
-var payStartREQ = function payStartREQ() {
-  return {
-    type: ActionType.HTTPREQ
-  };
-};
 
-var payStartREQ_SUCCESS = function payStartREQ_SUCCESS(response) {
-  return {
-    type: ActionType.HTTPREQ_SUCCESS,
-    payload: response
-  };
-};
-
-function payStartREQ_ERROR(reqError) {
-  return function (dispatch) {
-    reqError();
-    dispatch({
-      type: ActionType.HTTPREQ_ERROR
-    });
-  };
-}
-
-// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
-function payStartHttp(reqError) {
-  return function (dispatch) {
-    dispatch(payStartREQ());
-    return (0, _http2.default)({
-      url: '/userdata_start',
-      success: function success(response) {
-        return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
-      },
-      fail: function fail(response) {
-        return dispatch(payStartREQ_ERROR(reqError));
-      }
-    });
-  };
-}
+exports.default = http;
 
 /***/ }),
 /* 9 */
@@ -1615,110 +1597,141 @@ module.exports = function (module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.ActionType = undefined;
+exports.payWay = payWay;
+exports.chargeMoney = chargeMoney;
+exports.submit = submit;
+exports.payStartHttp = payStartHttp;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _http = __webpack_require__(8);
 
-// import fetch from 'isomorphic-fetch'
+var _http2 = _interopRequireDefault(_http);
 
-/*
-* 1. 请求的类型 type get post
-* 2. 请求地址 url
-* 3. 是异步的还是同步的 async false true
-* 4. 请求内容的格式 contentType
-* 5. 传输的数据 data json对象
-*
-* 6.响应成功处理函数 success function
-* 7.响应失败的处理函数 error function
-*
-* 这些都是动态参数 参数对象 options
-* */
+var _util = __webpack_require__(27);
 
-// window.$ = {};
-// $.ajax = function(options){
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//   if(!options || typeof options != 'object'){
-//     return false;
-//   }
-//   var type = options.method || 'get';
-//   var url = options.url || location.pathname;
-//   var async = true;
-//   var contentType = "text/html";
-//   var data = options.data || {};
-//   var dataStr = ''
-//   for(var key in data){
-//     dataStr += key+'='+data[key]+'&';
-//   }
-//   dataStr = dataStr && dataStr.slice(0,-1);
+var ActionType = exports.ActionType = {
+  PAYWAY: "payWay",
+  CHANGEMONEY: "changeMoney",
+  VERIFY: "verify",
+  HTTPREQ: "http_requert",
+  HTTPREQ_SUCCESS: "http_requert_success",
+  HTTPREQ_ERROR: "http_requert_error"
+};
 
-//   /*ajax 编程*/
-//   var xhr = new XMLHttpRequest();
-//   xhr.open(type,(type=='get'?url+'?'+dataStr:url),async);
-//   if(type == 'post'){
-//     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-//   }
-
-//   /*请求主体*/
-//   需要判断请求类型
-//   xhr.send(type=='get'?null:dataStr);
-
-//   /*监听响应状态的改变 响应状态*/
-//   xhr.onreadystatechange = function(){
-//     if(xhr.readyState == 4 && xhr.status == 200){
-//       /*success*/
-//       var data = '';
-//       var contentType = xhr.getResponseHeader('Content-Type');
-//       if(contentType.indexOf('xml') > -1){
-//         data = xhr.responseXML;
-//       }else if(contentType.indexOf('json') > -1){
-//         data = JSON.parse(xhr.responseText);
-//       }else{
-//         data = xhr.responseText;
-//       }
-//       options.success && options.success(data);
-//     }else if(xhr.readyState == 4){
-//       /*fail*/
-//       options.fail && options.fail('you request fail !');
-//     }
-
-//   }
-// }
-
+function payWay(payway) {
+  return {
+    type: ActionType.PAYWAY,
+    payload: payway
+  };
+};
 
 /**
-  * @param {Obj} options 传入的对象
+  * 修改输入金额的action
+  * @param {String} value  输入的金额
+  *
   */
-function http(options) {
-  // try{
-  //   wx.request(options)
-  // }catch(e){
-  // const init = {
-  //   method:options.method||'GET',
-  //   body:JSON.stringify(options.data||'')
-  // }
-  // fetch(options.url,init)
-  //   .then(response => {
-  //     if (response.status >= 400) {
-  //         throw new Error("Bad response from server");
-  //     }
-  //     return response.json()
-  //   })
-  //   .then(options.success||function(response){console.log(response)})
-  //   .catch(options.fail||function(response){console.log(response)})
-  // return this
-  // }
-  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
-    wx.request(options);
-  } else {
-    fetch(options);
-  }
+function chargeMoney(value) {
+  return function (dispatch) {
+    dispatch({
+      type: ActionType.CHANGEMONEY,
+      payload: value
+    });
+    return value;
+  };
+};
+
+var verify = function verify(dispatch, _verify) {
+  dispatch({
+    type: ActionType.VERIFY,
+    payload: _verify
+  });
+};
+
+/**
+  * 提交表单的action
+  * @param {func} fundsPayment  零钱支付
+  * @param {func} weichatPayment  微信支付
+  * @param {func} notMoney  没有足够的零钱的时候
+  * @param {func} errMoney  输入的金额有误的时候
+  */
+function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
+  return function (dispatch, getState) {
+    var _getState$pay = getState().pay,
+        balance = _getState$pay.balance,
+        chargeMoney = _getState$pay.chargeMoney,
+        payWay = _getState$pay.payWay,
+        userName = _getState$pay.userName;
+
+    if (chargeMoney > 0) {
+      if (payWay === 'funds') {
+        balance >= chargeMoney ? function () {
+          verify(dispatch, true);
+          fundsPayment(chargeMoney, userName);
+        }() : function () {
+          notMoney();
+          verify(dispatch, false);
+        }();
+      } else if (payWay === 'weichat') {
+        weichatPayment(chargeMoney);
+        verify(dispatch, true);
+      }
+    } else {
+      errMoney();
+      verify(dispatch, false);
+    }
+  };
 }
-// http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
+// 页面加载时的请求
+var payStartREQ = function payStartREQ() {
+  return {
+    type: ActionType.HTTPREQ
+  };
+};
 
-exports.default = http;
+var payStartREQ_SUCCESS = function payStartREQ_SUCCESS(response) {
+  return {
+    type: ActionType.HTTPREQ_SUCCESS,
+    payload: response
+  };
+};
+
+function payStartREQ_ERROR(reqError) {
+  return function (dispatch) {
+    reqError();
+    dispatch({
+      type: ActionType.HTTPREQ_ERROR
+    });
+  };
+}
+
+// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
+/**
+  * 页面加载时请求的action
+  * @param {func} reqError  请求失败
+  *
+  */
+function payStartHttp(reqError) {
+  return function (dispatch) {
+    dispatch(payStartREQ());
+    return (0, _http2.default)({
+      url: '/userdata_start',
+      success: function success(response) {
+        return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
+      },
+      fail: function fail(response) {
+        return dispatch(payStartREQ_ERROR(reqError));
+      }
+    });
+  };
+}
 
 /***/ }),
-/* 25 */
+/* 25 */,
+/* 26 */,
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1744,9 +1757,178 @@ function randomString(n) {
 // }
 
 /***/ }),
-/* 26 */,
-/* 27 */,
 /* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.ActionType = undefined;
+exports.keyInput = keyInput;
+exports.sendVerify = sendVerify;
+exports.submint = submint;
+exports.checkedBox = checkedBox;
+
+var _http = __webpack_require__(8);
+
+var _http2 = _interopRequireDefault(_http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ActionType = exports.ActionType = {
+	SENDVERIFY: 'sendVerify',
+	SETIFO: 'setIfo',
+	SETCHECKED: 'setChecked',
+	VERIFY: 'verify',
+	VERIFYSUCCESS: 'verifySuccess',
+	VERIFYFAIL: "verifyFail",
+	SUBMIT: 'submit',
+	SUBMITSUCCESS: 'submitSuccess',
+	SUBMITFAIL: 'submitFail'
+};
+
+/**
+ * 获得输入内容的action
+ * @param keys  	{String} store中要修改的key
+ * @param values  	{String} store中要修改的key的value
+ *
+ */
+function keyInput(keys, values) {
+	return {
+		type: ActionType.SETIFO,
+		payload: {
+			key: keys,
+			value: values
+		}
+	};
+}
+
+/**
+ * 发送验证码的action
+ * @param verifyError  	{func} 验证码发送失败
+ *
+ */
+function sendVerify(verifyError) {
+	return function (dispatch, getState) {
+		// 如果按钮的内容是“获取验证码”，则发起请求
+		var verifyCode = getState().signup.verifyCode;
+
+		if (verifyCode === '获取验证码') {
+			(0, _http2.default)({
+				url: '',
+				method: 'POST',
+				// 请求成功修改按钮内容为倒计时
+				success: function success() {
+					var setInt = setInterval(function () {
+						var msg = '';
+						var verifyCode = getState().signup.verifyCode;
+
+						if (verifyCode === '获取验证码') {
+							msg = 59;
+						} else if (verifyCode <= 1) {
+							msg = '获取验证码';
+						} else {
+							msg = verifyCode - 1;
+						}
+						dispatch({
+							type: ActionType.SENDVERIFY,
+							payload: msg
+						});
+						msg === '获取验证码' ? clearInterval(setInt) : '';
+					}, 1000);
+				},
+				// 请求失败执行传入的失败事件
+				fail: verifyError()
+			});
+		}
+	};
+}
+
+/**
+ * 表单提交按钮的action
+ * @param msg 			{Obj} 需要提交的内容
+ * @param errorMsg  	{func} 输入信息有误的
+ * @param submitSuccess {func} 表单提交成功
+ * @param submitError 	{func} 表单提交失败
+ *
+ */
+function submint(msg, errorMsg, submitSuccess, submitError) {
+	return function (dispatch, getState) {
+		var _getState$signup = getState().signup,
+		    phone = _getState$signup.phone,
+		    verify = _getState$signup.verify,
+		    username = _getState$signup.username,
+		    password = _getState$signup.password,
+		    passwordagain = _getState$signup.passwordagain,
+		    referrer = _getState$signup.referrer;
+
+		var Phone = phone.trim();
+		var Verify = verify.trim();
+		var Username = username.trim();
+		var Password = password.trim();
+		var Passwordagain = passwordagain.trim();
+		var Referrer = referrer.trim();
+		var phoneRegExp = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+
+		if (!phoneRegExp.test(Phone)) {
+			errorMsg('请输入正确的手机号！');
+			return;
+		}
+		if (Verify === '' || Verify.length !== 4) {
+			errorMsg('验证码输入错误！');
+			return;
+		}
+		if (Username === '') {
+			errorMsg('请输入用户名！');
+			return;
+		}
+		if (Password === '') {
+			errorMsg('请输入密码！');
+			return;
+		}
+		if (Passwordagain === Password) {
+			errorMsg('两次输入的密码不同！');
+			return;
+		}
+		if (!phoneRegExp.test(Referrer)) {
+			errorMsg('请输入正确的推荐人手机号！');
+			return;
+		}
+		console.log('form发生了submit事件，携带数据为：', msg);
+		dispatch({
+			type: ActionType.SUBMIT
+		});
+		(0, _http2.default)({
+			url: '',
+			method: 'POST',
+			success: function success() {
+				dispatch({
+					type: ActionType.SUBMITSUCCESS
+				});
+				submitSuccess();
+			},
+			fail: function fail() {
+				dispatch({
+					type: ActionType.SUBMITFAIL
+				});
+				submitError();
+			}
+		});
+	};
+}
+
+// 修改复选框选中状态的action
+function checkedBox() {
+	return {
+		type: ActionType.SETCHECKED
+	};
+}
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1758,11 +1940,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(4);
 
-var _reducers = __webpack_require__(33);
+var _reducers = __webpack_require__(34);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _middlewares = __webpack_require__(30);
+var _middlewares = __webpack_require__(31);
 
 var _middlewares2 = _interopRequireDefault(_middlewares);
 
@@ -1773,13 +1955,13 @@ var enhancer = (0, _redux.compose)(_middlewares2.default);
 exports.default = (0, _redux.createStore)(_reducers2.default, enhancer);
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_29__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_30__;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1791,11 +1973,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(4);
 
-var _reduxThunk = __webpack_require__(36);
+var _reduxThunk = __webpack_require__(38);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxLogger = __webpack_require__(35);
+var _reduxLogger = __webpack_require__(37);
 
 var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
@@ -1807,7 +1989,7 @@ var en = _redux.compose;
 exports.default = en((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)()));
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1825,7 +2007,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1859,7 +2041,7 @@ exports.default = function () {
   }
 };
 
-var _action = __webpack_require__(8);
+var _action = __webpack_require__(24);
 
 var initState = exports.initState = {
   value: 5,
@@ -1868,7 +2050,7 @@ var initState = exports.initState = {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1880,28 +2062,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(4);
 
-var _app = __webpack_require__(31);
+var _app = __webpack_require__(32);
 
 var _app2 = _interopRequireDefault(_app);
 
-var _counter = __webpack_require__(32);
+var _counter = __webpack_require__(33);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _pay = __webpack_require__(34);
+var _pay = __webpack_require__(35);
 
 var _pay2 = _interopRequireDefault(_pay);
+
+var _signup = __webpack_require__(36);
+
+var _signup2 = _interopRequireDefault(_signup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   app: _app2.default,
   counter: _counter2.default,
-  pay: _pay2.default
+  pay: _pay2.default,
+  signup: _signup2.default
 });
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1914,7 +2101,7 @@ exports.initState = undefined;
 
 var _redux = __webpack_require__(4);
 
-var _action = __webpack_require__(8);
+var _action = __webpack_require__(24);
 
 var initState = exports.initState = {
 	payWay: "funds",
@@ -1933,30 +2120,35 @@ exports.default = function () {
 	    payload = action.payload;
 
 	switch (type) {
+		// 设置支付方式
 		case _action.ActionType.PAYWAY:
 			return Object.assign({}, state, {
 				payWay: payload
 			});
+		// 设置充值金额
 		case _action.ActionType.CHANGEMONEY:
 			return Object.assign({}, state, {
 				chargeMoney: payload
 			});
-
+		// 设置是否完成验证(验证是否有足够的余额)
 		case _action.ActionType.VERIFY:
 			return Object.assign({}, state, {
 				verify: payload,
 				chargeMoney: ''
 			});
+		// 页面加载后发送的请求
 		case _action.ActionType.HTTPREQ:
 			return Object.assign({}, state, {
 				StartHttp: true
 			});
+		// 页面加载时的请求成功
 		case _action.ActionType.HTTPREQ_SUCCESS:
 			return Object.assign({}, state, {
 				StartHttp: false,
 				ratio: payload.ratio,
 				userName: payload.userName
 			});
+		// 页面加载时的请求失败
 		case _action.ActionType.HTTPREQ_ERROR:
 			return Object.assign({}, state, {
 				StartHttp: false,
@@ -1968,29 +2160,105 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_35__;
-
-/***/ }),
 /* 36 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_36__;
-
-/***/ }),
-/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _store = __webpack_require__(28);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.initState = undefined;
+
+var _signupAction = __webpack_require__(28);
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var initState = exports.initState = {
+	verifyCode: '获取验证码',
+	phone: "",
+	verify: '',
+	username: '',
+	password: '',
+	passwordagain: '',
+	referrer: '',
+	checked: false,
+	submit: false
+};
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
+	var action = arguments[1];
+	var type = action.type,
+	    payload = action.payload;
+
+	switch (type) {
+		// 设置输入内容
+		case _signupAction.ActionType.SETIFO:
+			return Object.assign({}, state, _defineProperty({}, payload.key, payload.value));
+		// 设置是否已经阅读协议(复选框)
+		case _signupAction.ActionType.SETCHECKED:
+			return Object.assign({}, state, {
+				checked: !state.checked
+			});
+		// 设置发送验证码按钮的内容
+		case _signupAction.ActionType.SENDVERIFY:
+			return Object.assign({}, state, {
+				verifyCode: payload
+			});
+		// 设置发送开始
+		case _signupAction.ActionType.SUBMIT:
+			return Object.assign({}, state, {
+				submit: true
+			});
+		// 设置表单提交成功
+		case _signupAction.ActionType.SUBMITSUCCESS:
+			return Object.assign({}, state, {
+				submit: false
+			});
+		// 设置表单提交失败
+		case _signupAction.ActionType.SUBMITFAIL:
+			return Object.assign({}, state, {
+				verifyCode: '获取验证码',
+				phone: "",
+				verify: '',
+				username: '',
+				password: '',
+				passwordagain: '',
+				referrer: '',
+				checked: false,
+				submit: false
+			});
+		default:
+			return state;
+	}
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_37__;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_38__;
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _store = __webpack_require__(29);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _wxappRedux = __webpack_require__(29);
+var _wxappRedux = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

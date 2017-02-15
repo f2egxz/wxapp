@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux")) : factory(root["../../lib/wxapp-redux"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_27__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_26__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -814,125 +814,107 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ActionType = undefined;
-exports.payWay = payWay;
-exports.chargeMoney = chargeMoney;
-exports.submit = submit;
-exports.payStartHttp = payStartHttp;
 
-var _http = __webpack_require__(24);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _http2 = _interopRequireDefault(_http);
+// import fetch from 'isomorphic-fetch'
 
-var _util = __webpack_require__(25);
+/*
+* 1. 请求的类型 type get post
+* 2. 请求地址 url
+* 3. 是异步的还是同步的 async false true
+* 4. 请求内容的格式 contentType
+* 5. 传输的数据 data json对象
+*
+* 6.响应成功处理函数 success function
+* 7.响应失败的处理函数 error function
+*
+* 这些都是动态参数 参数对象 options
+* */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// window.$ = {};
+// $.ajax = function(options){
 
-var ActionType = exports.ActionType = {
-  PAYWAY: "payWay",
-  CHANGEMONEY: "changeMoney",
-  VERIFY: "verify",
-  HTTPREQ: "http_requert",
-  HTTPREQ_SUCCESS: "http_requert_success",
-  HTTPREQ_ERROR: "http_requert_error"
-};
+//   if(!options || typeof options != 'object'){
+//     return false;
+//   }
+//   var type = options.method || 'get';
+//   var url = options.url || location.pathname;
+//   var async = true;
+//   var contentType = "text/html";
+//   var data = options.data || {};
+//   var dataStr = ''
+//   for(var key in data){
+//     dataStr += key+'='+data[key]+'&';
+//   }
+//   dataStr = dataStr && dataStr.slice(0,-1);
 
-function payWay(payway) {
-  return {
-    type: ActionType.PAYWAY,
-    payload: payway
-  };
-};
+//   /*ajax 编程*/
+//   var xhr = new XMLHttpRequest();
+//   xhr.open(type,(type=='get'?url+'?'+dataStr:url),async);
+//   if(type == 'post'){
+//     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+//   }
 
-function chargeMoney(value) {
-  return function (dispatch) {
-    dispatch({
-      type: ActionType.CHANGEMONEY,
-      payload: value
-    });
-    return value;
-  };
-};
+//   /*请求主体*/
+//   需要判断请求类型
+//   xhr.send(type=='get'?null:dataStr);
 
-var verify = function verify(dispatch, _verify) {
-  dispatch({
-    type: ActionType.VERIFY,
-    payload: _verify
-  });
-};
+//   /*监听响应状态的改变 响应状态*/
+//   xhr.onreadystatechange = function(){
+//     if(xhr.readyState == 4 && xhr.status == 200){
+//       /*success*/
+//       var data = '';
+//       var contentType = xhr.getResponseHeader('Content-Type');
+//       if(contentType.indexOf('xml') > -1){
+//         data = xhr.responseXML;
+//       }else if(contentType.indexOf('json') > -1){
+//         data = JSON.parse(xhr.responseText);
+//       }else{
+//         data = xhr.responseText;
+//       }
+//       options.success && options.success(data);
+//     }else if(xhr.readyState == 4){
+//       /*fail*/
+//       options.fail && options.fail('you request fail !');
+//     }
+
+//   }
+// }
+
 
 /**
-  * @param {func} fundsPayment  零钱支付
-  * @param {func} weichatPayment  微信支付
-  * @param {func} notMoney  没有足够的零钱的时候
-  * @param {func} errMoney  输入的金额有误的时候
+  * @param {Obj} options 传入的对象
   */
-function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
-  return function (dispatch, getState) {
-    var _getState$pay = getState().pay,
-        balance = _getState$pay.balance,
-        chargeMoney = _getState$pay.chargeMoney,
-        payWay = _getState$pay.payWay,
-        userName = _getState$pay.userName;
-
-    if (chargeMoney > 0) {
-      if (payWay === 'funds') {
-        balance >= chargeMoney ? function () {
-          verify(dispatch, true);
-          fundsPayment(chargeMoney, userName);
-        }() : function () {
-          notMoney();
-          verify(dispatch, false);
-        }();
-      } else if (payWay === 'weichat') {
-        weichatPayment(chargeMoney);
-        verify(dispatch, true);
-      }
-    } else {
-      errMoney();
-      verify(dispatch, false);
-    }
-  };
+function http(options) {
+  // try{
+  //   wx.request(options)
+  // }catch(e){
+  // const init = {
+  //   method:options.method||'GET',
+  //   body:JSON.stringify(options.data||'')
+  // }
+  // fetch(options.url,init)
+  //   .then(response => {
+  //     if (response.status >= 400) {
+  //         throw new Error("Bad response from server");
+  //     }
+  //     return response.json()
+  //   })
+  //   .then(options.success||function(response){console.log(response)})
+  //   .catch(options.fail||function(response){console.log(response)})
+  // return this
+  // }
+  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
+    wx.request(options);
+  } else {
+    // fetch(options)
+  }
 }
+// http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
-// 页面加载时的请求
-var payStartREQ = function payStartREQ() {
-  return {
-    type: ActionType.HTTPREQ
-  };
-};
 
-var payStartREQ_SUCCESS = function payStartREQ_SUCCESS(response) {
-  return {
-    type: ActionType.HTTPREQ_SUCCESS,
-    payload: response
-  };
-};
-
-function payStartREQ_ERROR(reqError) {
-  return function (dispatch) {
-    reqError();
-    dispatch({
-      type: ActionType.HTTPREQ_ERROR
-    });
-  };
-}
-
-// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
-function payStartHttp(reqError) {
-  return function (dispatch) {
-    dispatch(payStartREQ());
-    return (0, _http2.default)({
-      url: '/userdata_start',
-      success: function success(response) {
-        return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
-      },
-      fail: function fail(response) {
-        return dispatch(payStartREQ_ERROR(reqError));
-      }
-    });
-  };
-}
+exports.default = http;
 
 /***/ }),
 /* 9 */
@@ -1615,110 +1597,152 @@ module.exports = function (module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.ActionType = undefined;
+exports.payWay = payWay;
+exports.chargeMoney = chargeMoney;
+exports.submit = submit;
+exports.payStartHttp = payStartHttp;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _http = __webpack_require__(8);
 
-// import fetch from 'isomorphic-fetch'
+var _http2 = _interopRequireDefault(_http);
 
-/*
-* 1. 请求的类型 type get post
-* 2. 请求地址 url
-* 3. 是异步的还是同步的 async false true
-* 4. 请求内容的格式 contentType
-* 5. 传输的数据 data json对象
-*
-* 6.响应成功处理函数 success function
-* 7.响应失败的处理函数 error function
-*
-* 这些都是动态参数 参数对象 options
-* */
+var _util = __webpack_require__(27);
 
-// window.$ = {};
-// $.ajax = function(options){
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//   if(!options || typeof options != 'object'){
-//     return false;
-//   }
-//   var type = options.method || 'get';
-//   var url = options.url || location.pathname;
-//   var async = true;
-//   var contentType = "text/html";
-//   var data = options.data || {};
-//   var dataStr = ''
-//   for(var key in data){
-//     dataStr += key+'='+data[key]+'&';
-//   }
-//   dataStr = dataStr && dataStr.slice(0,-1);
+var ActionType = exports.ActionType = {
+  PAYWAY: "payWay",
+  CHANGEMONEY: "changeMoney",
+  VERIFY: "verify",
+  HTTPREQ: "http_requert",
+  HTTPREQ_SUCCESS: "http_requert_success",
+  HTTPREQ_ERROR: "http_requert_error"
+};
 
-//   /*ajax 编程*/
-//   var xhr = new XMLHttpRequest();
-//   xhr.open(type,(type=='get'?url+'?'+dataStr:url),async);
-//   if(type == 'post'){
-//     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-//   }
-
-//   /*请求主体*/
-//   需要判断请求类型
-//   xhr.send(type=='get'?null:dataStr);
-
-//   /*监听响应状态的改变 响应状态*/
-//   xhr.onreadystatechange = function(){
-//     if(xhr.readyState == 4 && xhr.status == 200){
-//       /*success*/
-//       var data = '';
-//       var contentType = xhr.getResponseHeader('Content-Type');
-//       if(contentType.indexOf('xml') > -1){
-//         data = xhr.responseXML;
-//       }else if(contentType.indexOf('json') > -1){
-//         data = JSON.parse(xhr.responseText);
-//       }else{
-//         data = xhr.responseText;
-//       }
-//       options.success && options.success(data);
-//     }else if(xhr.readyState == 4){
-//       /*fail*/
-//       options.fail && options.fail('you request fail !');
-//     }
-
-//   }
-// }
-
+function payWay(payway) {
+  return {
+    type: ActionType.PAYWAY,
+    payload: payway
+  };
+};
 
 /**
-  * @param {Obj} options 传入的对象
+  * 修改输入金额的action
+  * @param {String} value  输入的金额
+  *
   */
-function http(options) {
-  // try{
-  //   wx.request(options)
-  // }catch(e){
-  // const init = {
-  //   method:options.method||'GET',
-  //   body:JSON.stringify(options.data||'')
-  // }
-  // fetch(options.url,init)
-  //   .then(response => {
-  //     if (response.status >= 400) {
-  //         throw new Error("Bad response from server");
-  //     }
-  //     return response.json()
-  //   })
-  //   .then(options.success||function(response){console.log(response)})
-  //   .catch(options.fail||function(response){console.log(response)})
-  // return this
-  // }
-  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
-    wx.request(options);
-  } else {
-    fetch(options);
-  }
+function chargeMoney(value) {
+  return function (dispatch) {
+    dispatch({
+      type: ActionType.CHANGEMONEY,
+      payload: value
+    });
+    return value;
+  };
+};
+
+var verify = function verify(dispatch, _verify) {
+  dispatch({
+    type: ActionType.VERIFY,
+    payload: _verify
+  });
+};
+
+/**
+  * 提交表单的action
+  * @param {func} fundsPayment  零钱支付
+  * @param {func} weichatPayment  微信支付
+  * @param {func} notMoney  没有足够的零钱的时候
+  * @param {func} errMoney  输入的金额有误的时候
+  */
+function submit(fundsPayment, weichatPayment, notMoney, errMoney) {
+  return function (dispatch, getState) {
+    var _getState$pay = getState().pay,
+        balance = _getState$pay.balance,
+        chargeMoney = _getState$pay.chargeMoney,
+        payWay = _getState$pay.payWay,
+        userName = _getState$pay.userName;
+
+    if (chargeMoney > 0) {
+      if (payWay === 'funds') {
+        balance >= chargeMoney ? function () {
+          verify(dispatch, true);
+          fundsPayment(chargeMoney, userName);
+        }() : function () {
+          notMoney();
+          verify(dispatch, false);
+        }();
+      } else if (payWay === 'weichat') {
+        weichatPayment(chargeMoney);
+        verify(dispatch, true);
+      }
+    } else {
+      errMoney();
+      verify(dispatch, false);
+    }
+  };
 }
-// http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
+// 页面加载时的请求
+var payStartREQ = function payStartREQ() {
+  return {
+    type: ActionType.HTTPREQ
+  };
+};
 
-exports.default = http;
+var payStartREQ_SUCCESS = function payStartREQ_SUCCESS(response) {
+  return {
+    type: ActionType.HTTPREQ_SUCCESS,
+    payload: response
+  };
+};
+
+function payStartREQ_ERROR(reqError) {
+  return function (dispatch) {
+    reqError();
+    dispatch({
+      type: ActionType.HTTPREQ_ERROR
+    });
+  };
+}
+
+// TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
+/**
+  * 页面加载时请求的action
+  * @param {func} reqError  请求失败
+  *
+  */
+function payStartHttp(reqError) {
+  return function (dispatch) {
+    dispatch(payStartREQ());
+    return (0, _http2.default)({
+      url: '/userdata_start',
+      success: function success(response) {
+        return dispatch(payStartREQ_SUCCESS({ userName: response.username, ratio: response.balance }));
+      },
+      fail: function fail(response) {
+        return dispatch(payStartREQ_ERROR(reqError));
+      }
+    });
+  };
+}
 
 /***/ }),
 /* 25 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","line":"_30pOnbGmZf8u6PDoDEnmW","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy","SU_signup":"P_BXMq7jknab7BLZALU7I","SU_input":"_2OyPIeS_fIFmh03XItQvjU","SU_name":"_2UIFJXH0klFTh1_l3UDwCe","SU_submit":"Xv48TipKQSmnt1aNVM3YJ","SU_agreement":"_2He0v-_W3E6OGPKIdT9kP0","SU_checkbox":"_3UzikdfmOktlWt9-ptTdOB","SU_protocol":"_35-XhHOSXPrzTgAsBWFcyI","SU_text":"_5psSY6d0Ur9hvEM90DYxM","SU_getCoding":"_1XE7r26hq84IFgA3wClviP","SU_icon":"_2txG65E3lddS680K2z7BYL"};
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_26__;
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1744,19 +1768,6 @@ function randomString(n) {
 // }
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy"};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
-
-/***/ }),
 /* 28 */,
 /* 29 */,
 /* 30 */,
@@ -1767,7 +1778,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
 /* 35 */,
 /* 36 */,
 /* 37 */,
-/* 38 */
+/* 38 */,
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1775,13 +1788,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_27__;
 
 var _redux = __webpack_require__(4);
 
-var _wxappRedux = __webpack_require__(27);
+var _wxappRedux = __webpack_require__(26);
 
-var _action = __webpack_require__(8);
+var _action = __webpack_require__(24);
 
 var action = _interopRequireWildcard(_action);
 
-var _counter = __webpack_require__(26);
+var _counter = __webpack_require__(25);
 
 var _counter2 = _interopRequireDefault(_counter);
 

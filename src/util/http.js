@@ -91,7 +91,7 @@
   if(typeof wx ==='object'){
     wx.request(options)
   }else{
-    fetch(options)
+    // fetch(options)
   }
 }
 // http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法

@@ -17,6 +17,11 @@ export function payWay(payway) {
   }
 };
 
+/**
+  * 修改输入金额的action
+  * @param {String} value  输入的金额
+  *
+  */
 export function chargeMoney(value) {
   return (dispatch) => {
   	dispatch({
@@ -41,6 +46,7 @@ const verify = (dispatch, verify)=>{
 
 
 /**
+  * 提交表单的action
   * @param {func} fundsPayment  零钱支付
   * @param {func} weichatPayment  微信支付
   * @param {func} notMoney  没有足够的零钱的时候
@@ -99,6 +105,11 @@ function payStartREQ_ERROR(reqError) {
 
 
 // TODO 暂定为从这里获取用户的userName (或者由上一个页面传入)
+/**
+  * 页面加载时请求的action
+  * @param {func} reqError  请求失败
+  *
+  */
 export function payStartHttp(reqError){
   return (dispatch) => {
     dispatch(payStartREQ())

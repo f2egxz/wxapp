@@ -21,6 +21,9 @@ page {
 ._1GzNUVvtnRqkaZQY0lqYFk {
   zoom: 1;
 }
+._30pOnbGmZf8u6PDoDEnmW {
+	border:1rpx solid #f1f1f1;
+}
 /*-----common end-------*/
 
 
@@ -92,3 +95,75 @@ page {
 
 
 /*-------paySuccess end--------*/
+
+/*--------signup start ------------*/
+.P_BXMq7jknab7BLZALU7I {
+	position: relative;
+	height: 100%;
+	background-color:  #f0f0f0;
+}
+
+._2OyPIeS_fIFmh03XItQvjU {
+	position: relative;
+    padding: 28rpx 0 28rpx 100rpx;
+    background-color: #ffffff;
+    font-size: 18px;
+}
+
+._2UIFJXH0klFTh1_l3UDwCe {
+	float: left;
+    color: #6e6e6e;
+    margin:10rpx 22rpx 0 0;
+    font-size: 18px;
+}
+
+.Xv48TipKQSmnt1aNVM3YJ {
+	margin: 70rpx 36rpx;
+}
+
+._2He0v-_W3E6OGPKIdT9kP0 {
+	margin-right:36rpx;
+    text-align: right;
+    font-size: 32rpx;
+}
+
+._3UzikdfmOktlWt9-ptTdOB {
+	display: inline-block
+}
+
+._35-XhHOSXPrzTgAsBWFcyI {
+	color: #25e0a2;
+    display: inline-block
+}
+
+._5psSY6d0Ur9hvEM90DYxM {
+	position: absolute;
+    bottom: 20rpx;
+    left: 0rpx;
+    width: 100%;
+    text-align: center;
+}
+
+._1XE7r26hq84IFgA3wClviP {
+	position: absolute;
+    bottom:28rpx;
+    right: 30rpx;
+    color:#00d495;
+    border: 2rpx solid #00d495;
+    border-radius: 8rpx;
+    font-size: 30rpx;
+    padding: 8rpx 4rpx;
+    z-index: 99;
+}
+
+._1XE7r26hq84IFgA3wClviP:active {
+	background-color: #f0f0f0;
+}
+
+._2txG65E3lddS680K2z7BYL {
+	 position: absolute;
+    top: 28rpx;
+    left: 36rpx;
+}
+
+/*--------signup end ------------*/

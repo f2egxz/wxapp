@@ -4,7 +4,7 @@ import * as Action from './../../actions/action'
 
 const mockStore = configureMockStore([ thunkMiddleware ])
 
-describe('actions',()=>{
+describe('pay actions test',()=>{
 	it('ActionType test',()=>{
 		const expectedAction = {
 			PAYWAY:"payWay",

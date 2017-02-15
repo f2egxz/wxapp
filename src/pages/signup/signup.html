@@ -1,0 +1,53 @@
+<!--pages/signup/signup.wxml-->
+<!-- style : SU -->
+<view class='{{style.SU_signup}}'>
+    <form bindsubmit="formSubmit">
+      <view class="{{style.SU_input}}">
+        <icon type="success" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>手机号</view>
+        <input name='phone' id="phone" type='number' value="{{phone}}" placeholder="请输入手机号" bindinput="bindKeyInput" focus/>
+        <view class="{{style.SU_getCoding}}" bindtap="verification">{{verifyCode==='获取验证码'?verifyCode:verifyCode+'秒后重试'}}</view>
+      </view>
+      <view class="{{style.line}}"></view>
+      <view class="{{style.SU_input}}">
+        <icon type="success" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>验证码</view>
+        <input name='verify code' id="verify" bindinput="bindKeyInput" value="{{verify}}" placeholder="请输入验证码" />
+      </view>
+      <view class="{{style.line}}"></view>
+      <view class="{{style.SU_input}}">
+        <icon type="waiting_circle" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>昵称</view>
+        <input name='username' id="username" bindinput="bindKeyInput" value="{{username}}" placeholder="请输入用户名"/>
+      </view>
+      <view class="{{style.line}}"></view>
+      <view class="{{style.SU_input}}">
+        <icon type="waiting_circle" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>密码</view>
+        <input name='password' id="password"  password='{{true}}' bindinput="bindKeyInput" value="{{password}}" placeholder="字母开头6-18位之间"/>
+      </view>
+      <view class="{{style.line}}"></view>
+      <view class="{{style.SU_input}}">
+        <icon type="waiting_circle" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>确认密码</view>
+        <input name='passwordagain' id="passwordagain" password='{{true}}' bindinput="bindKeyInput" value="{{passwordagain}}" placeholder="字母开头6-18位之间"/>
+      </view>
+      <view class="{{style.line}}"></view>
+      <view class="{{style.SU_input}}">
+        <icon type="waiting_circle" size="20" class='{{style.SU_icon}}'/>
+        <view class='{{style.SU_name}}'>推荐人手机号</view>
+        <input name='referrer' id="referrer" type='number' bindinput="bindKeyInput" value="{{referrer}}" placeholder="请输入推荐人手机号"/>
+      </view>
+      <button  formType='submit'  type="primary" loading="{{inloading}}" disabled='{{!checked}}'
+          class='{{style.SU_submit}}'> 注册 </button>
+    </form>
+      <view class='{{style.SU_agreement}}'>
+        <checkbox-group id="checked" class="{{style.SU_checkbox}}" bindchange="checkboxChange">
+          <label>
+            <checkbox value="agree protocol"  checked="{{checked}}"/>注册既代表同意
+          </label>
+        </checkbox-group>
+        <navigator url='' class='{{style.SU_protocol}}' open-type="navigate">易换用户协议</navigator>
+      </view>
+      <view class='{{style.SU_text}}'>注册可以享受更多精彩内容</view>
+</view>

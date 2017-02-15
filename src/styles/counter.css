@@ -21,6 +21,9 @@ page {
 .clearfix {
   zoom: 1;
 }
+.line {
+	border:1rpx solid #f1f1f1;
+}
 /*-----common end-------*/
 
 
@@ -92,3 +95,75 @@ page {
 
 
 /*-------paySuccess end--------*/
+
+/*--------signup start ------------*/
+.SU_signup {
+	position: relative;
+	height: 100%;
+	background-color:  #f0f0f0;
+}
+
+.SU_input {
+	position: relative;
+    padding: 28rpx 0 28rpx 100rpx;
+    background-color: #ffffff;
+    font-size: 18px;
+}
+
+.SU_name {
+	float: left;
+    color: #6e6e6e;
+    margin:10rpx 22rpx 0 0;
+    font-size: 18px;
+}
+
+.SU_submit {
+	margin: 70rpx 36rpx;
+}
+
+.SU_agreement {
+	margin-right:36rpx;
+    text-align: right;
+    font-size: 32rpx;
+}
+
+.SU_checkbox {
+	display: inline-block
+}
+
+.SU_protocol {
+	color: #25e0a2;
+    display: inline-block
+}
+
+.SU_text {
+	position: absolute;
+    bottom: 20rpx;
+    left: 0rpx;
+    width: 100%;
+    text-align: center;
+}
+
+.SU_getCoding {
+	position: absolute;
+    bottom:28rpx;
+    right: 30rpx;
+    color:#00d495;
+    border: 2rpx solid #00d495;
+    border-radius: 8rpx;
+    font-size: 30rpx;
+    padding: 8rpx 4rpx;
+    z-index: 99;
+}
+
+.SU_getCoding:active {
+	background-color: #f0f0f0;
+}
+
+.SU_icon {
+	 position: absolute;
+    top: 28rpx;
+    left: 36rpx;
+}
+
+/*--------signup end ------------*/
