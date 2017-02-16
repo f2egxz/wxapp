@@ -119,11 +119,18 @@ export function submint (msg,errorMsg,submitSuccess,submitError){
 		http({
 			url:'',
 			method:'POST',
-			success:()=>{
-				dispatch({
+			success:(response)=>{
+				if(response.success){
+					dispatch({
 					type:ActionType.SUBMITSUCCESS
-				})
-				submitSuccess()
+					})
+					submitSuccess()
+				}else{
+					dispatch({
+						type:ActionType.SUBMITFAIL
+					})
+					submitError()
+				}
 			},
 			fail:()=>{
 				dispatch({
