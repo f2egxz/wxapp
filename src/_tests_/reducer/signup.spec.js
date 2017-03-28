@@ -4,7 +4,7 @@ import { ActionType }	from "../../actions/signupAction"
 
 const assertReducer = testReducer(signup)
 
-describe("teest reducer signup page ",()=>{
+describe("test reducer signup page ",()=>{
 	it("set verify is 4321",()=>{
 		assertReducer({
 			from:{

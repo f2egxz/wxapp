@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/commodity/commodity",
+    "pages/feedback/feedback",
     "pages/signup/signup",
     "pages/index/index",
     "pages/paySuccess/paySuccess",

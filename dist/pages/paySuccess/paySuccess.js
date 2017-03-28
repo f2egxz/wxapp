@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("../../lib/wxapp-redux")) : factory(root["../../lib/wxapp-redux"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_26__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_10__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,11 +73,66 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
+/******/ 	return __webpack_require__(__webpack_require__.s = 48);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
+
+var _createStore = __webpack_require__(3);
+
+var _createStore2 = _interopRequireDefault(_createStore);
+
+var _combineReducers = __webpack_require__(13);
+
+var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
+var _bindActionCreators = __webpack_require__(12);
+
+var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+
+var _applyMiddleware = __webpack_require__(11);
+
+var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+
+var _compose = __webpack_require__(2);
+
+var _compose2 = _interopRequireDefault(_compose);
+
+var _warning = __webpack_require__(4);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/*
+* This is a dummy function to check if the function name has been altered by minification.
+* If the function has been minified and NODE_ENV !== 'production', warn the user.
+*/
+function isCrushed() {}
+
+if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+  (0, _warning2.default)('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+}
+
+exports.createStore = _createStore2.default;
+exports.combineReducers = _combineReducers2.default;
+exports.bindActionCreators = _bindActionCreators2.default;
+exports.applyMiddleware = _applyMiddleware2.default;
+exports.compose = _compose2.default;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -264,7 +319,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -310,7 +365,7 @@ function compose() {
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,7 +384,7 @@ var _isPlainObject = __webpack_require__(6);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _symbolObservable = __webpack_require__(20);
+var _symbolObservable = __webpack_require__(22);
 
 var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -582,7 +637,7 @@ function createStore(reducer, preloadedState, enhancer) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -615,61 +670,6 @@ function warning(message) {
 }
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
-
-var _createStore = __webpack_require__(2);
-
-var _createStore2 = _interopRequireDefault(_createStore);
-
-var _combineReducers = __webpack_require__(11);
-
-var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-var _bindActionCreators = __webpack_require__(10);
-
-var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
-
-var _applyMiddleware = __webpack_require__(9);
-
-var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
-
-var _compose = __webpack_require__(1);
-
-var _compose2 = _interopRequireDefault(_compose);
-
-var _warning = __webpack_require__(3);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/*
-* This is a dummy function to check if the function name has been altered by minification.
-* If the function has been minified and NODE_ENV !== 'production', warn the user.
-*/
-function isCrushed() {}
-
-if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-  (0, _warning2.default)('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-}
-
-exports.createStore = _createStore2.default;
-exports.combineReducers = _combineReducers2.default;
-exports.bindActionCreators = _bindActionCreators2.default;
-exports.applyMiddleware = _applyMiddleware2.default;
-exports.compose = _compose2.default;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -680,7 +680,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _root = __webpack_require__(18);
+var _root = __webpack_require__(20);
 
 var _root2 = _interopRequireDefault(_root);
 
@@ -702,15 +702,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _baseGetTag = __webpack_require__(12);
+var _baseGetTag = __webpack_require__(14);
 
 var _baseGetTag2 = _interopRequireDefault(_baseGetTag);
 
-var _getPrototype = __webpack_require__(14);
+var _getPrototype = __webpack_require__(16);
 
 var _getPrototype2 = _interopRequireDefault(_getPrototype);
 
-var _isObjectLike = __webpack_require__(19);
+var _isObjectLike = __webpack_require__(21);
 
 var _isObjectLike2 = _interopRequireDefault(_isObjectLike);
 
@@ -814,9 +814,6 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 // import fetch from 'isomorphic-fetch'
 
 /*
@@ -905,11 +902,11 @@ function http(options) {
   //   .catch(options.fail||function(response){console.log(response)})
   // return this
   // }
-  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
-    wx.request(options);
-  } else {
-    // fetch(options)
-  }
+  // if(typeof wx ==='object'){
+  wx.request(options);
+  // }else{
+  // fetch(options)
+  // }
 }
 // http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
@@ -918,6 +915,19 @@ exports.default = http;
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","line":"_30pOnbGmZf8u6PDoDEnmW","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy","SU_signup":"P_BXMq7jknab7BLZALU7I","SU_input":"_2OyPIeS_fIFmh03XItQvjU","SU_name":"_2UIFJXH0klFTh1_l3UDwCe","SU_submit":"Xv48TipKQSmnt1aNVM3YJ","SU_agreement":"_2He0v-_W3E6OGPKIdT9kP0","SU_checkbox":"_3UzikdfmOktlWt9-ptTdOB","SU_protocol":"_35-XhHOSXPrzTgAsBWFcyI","SU_text":"_5psSY6d0Ur9hvEM90DYxM","SU_getCoding":"_1XE7r26hq84IFgA3wClviP","SU_icon":"_2txG65E3lddS680K2z7BYL","FB_feedback":"_2Ii0FG1YApCKEpr69955Jz","FB_textarea":"_27Y9s53pY2mSlMo67KvMjt","FB_text":"_1hd5PfbFcphEqVwneLkR_s","FB_input":"_3Xu3PBFEKdrcEuH7-t295F","G_commodity":"_2g24c3CVhVm4__dMsEhPxb","G_scroll_view":"_2DF82_0E69VqiH_LHtj9v_","G_image":"_4_wszZ_cfqcjuvBfhMqe-","G_image_item":"_3XAtJzEnCujD7-e003q7O","G_message":"_2OVIX9BifMS9_20FG21sCO","G_company":"_2ljh6SG6UOG9SX-K_uPZ_z","G_tabTitle":"KC8t0RsVavIndJg0yp-gZ","G_tabTitle_fl":"_3C8ifCqde_qs0K1WV8m-W8","G_tabTitle_fr":"_2kb6bl8FzJHNUSebYc5Qhv","G_showTab":"_1h7LyaMTGa03bqjpMT34dT","G_artical_title":"_3JhYan6rw3c50dPCOKUVBN","G_artical_icon":"_2JlkjNSuGfgLwsbVspxWrs","G_bottom":"kt1eTIKSgMf5ruX7YM-n_","G_btm_item":"_1zHALTR68oCH7FWHjOn3N","G_btm_collect":"X9VnAzqwzX1FfLGQG-olb","G_btm_collect_item":"_1j9u0kWeEICtIDNahprIUe","G_btm_buy":"_1Ixtpu6RaV_GOLcX_562Ae","G_buy_nav":"_2FHvjlQMw5uhJKGwCMg4qw","G_notice":"_2q5n-yIeU6SqMNU9xSC8iN","G_notice_container":"_2pA1YM3kfVM7iK745pQyGT"};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -928,7 +938,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = applyMiddleware;
 
-var _compose = __webpack_require__(1);
+var _compose = __webpack_require__(2);
 
 var _compose2 = _interopRequireDefault(_compose);
 
@@ -990,7 +1000,7 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1052,7 +1062,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1063,13 +1073,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = combineReducers;
 
-var _createStore = __webpack_require__(2);
+var _createStore = __webpack_require__(3);
 
 var _isPlainObject = __webpack_require__(6);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _warning = __webpack_require__(3);
+var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -1200,10 +1210,10 @@ function combineReducers(reducers) {
     return hasChanged ? nextState : state;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1217,11 +1227,11 @@ var _Symbol2 = __webpack_require__(5);
 
 var _Symbol3 = _interopRequireDefault(_Symbol2);
 
-var _getRawTag = __webpack_require__(15);
+var _getRawTag = __webpack_require__(17);
 
 var _getRawTag2 = _interopRequireDefault(_getRawTag);
 
-var _objectToString = __webpack_require__(16);
+var _objectToString = __webpack_require__(18);
 
 var _objectToString2 = _interopRequireDefault(_objectToString);
 
@@ -1251,7 +1261,7 @@ function baseGetTag(value) {
 exports.default = baseGetTag;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1270,7 +1280,7 @@ exports.default = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1280,7 +1290,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _overArg = __webpack_require__(17);
+var _overArg = __webpack_require__(19);
 
 var _overArg2 = _interopRequireDefault(_overArg);
 
@@ -1292,7 +1302,7 @@ var getPrototype = (0, _overArg2.default)(Object.getPrototypeOf, Object);
 exports.default = getPrototype;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1354,7 +1364,7 @@ function getRawTag(value) {
 exports.default = getRawTag;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1387,7 +1397,7 @@ function objectToString(value) {
 exports.default = objectToString;
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1413,7 +1423,7 @@ function overArg(func, transform) {
 exports.default = overArg;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1425,7 +1435,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _freeGlobal = __webpack_require__(13);
+var _freeGlobal = __webpack_require__(15);
 
 var _freeGlobal2 = _interopRequireDefault(_freeGlobal);
 
@@ -1440,7 +1450,7 @@ var root = _freeGlobal2.default || freeSelf || Function('return this')();
 exports.default = root;
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1483,16 +1493,16 @@ function isObjectLike(value) {
 exports.default = isObjectLike;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(21);
+module.exports = __webpack_require__(23);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1502,7 +1512,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ponyfill = __webpack_require__(22);
+var _ponyfill = __webpack_require__(24);
 
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -1526,10 +1536,10 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(25)(module)))
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1558,7 +1568,7 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1588,7 +1598,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1729,19 +1739,6 @@ function payStartHttp(reqError) {
 }
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"fl":"_1RmnMEWYX3zXqHv73yWlHr","fr":"_1FrGN0JH01KeGeZ15UQ0o2","clearfix":"_1GzNUVvtnRqkaZQY0lqYFk","line":"_30pOnbGmZf8u6PDoDEnmW","payPage":"_3Mxu7Md0OLNlaaCEaeYb0c","P_content":"_2DF1hyC6HGzIbdCUKL7mkn","P_way":"dQ1vCbt4ZBCw7o3-W1QGJ","P_money":"_3feFPVCVC6bo0cdpAWX8mC","P_sign":"aj5UMO6-TlO5MNRbXYCem","P_input":"_3UY3GEC_lDrSE4l79xMf0s","PS_paySuccess":"_27YLax_0asXkLwjwU8uPkv","PS_icon":"_2ZH6fpYkadq2SJ-jq1qcjw","PS_title":"_3LxmeSPlVDXd6PIFSK9-pe","PS_money":"_3fMnglyBdBSfl-uiRFEWKy","SU_signup":"P_BXMq7jknab7BLZALU7I","SU_input":"_2OyPIeS_fIFmh03XItQvjU","SU_name":"_2UIFJXH0klFTh1_l3UDwCe","SU_submit":"Xv48TipKQSmnt1aNVM3YJ","SU_agreement":"_2He0v-_W3E6OGPKIdT9kP0","SU_checkbox":"_3UzikdfmOktlWt9-ptTdOB","SU_protocol":"_35-XhHOSXPrzTgAsBWFcyI","SU_text":"_5psSY6d0Ur9hvEM90DYxM","SU_getCoding":"_1XE7r26hq84IFgA3wClviP","SU_icon":"_2txG65E3lddS680K2z7BYL"};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_26__;
-
-/***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1782,21 +1779,27 @@ function randomString(n) {
 /* 39 */,
 /* 40 */,
 /* 41 */,
-/* 42 */
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _redux = __webpack_require__(4);
+var _redux = __webpack_require__(0);
 
-var _wxappRedux = __webpack_require__(26);
+var _wxappRedux = __webpack_require__(10);
 
-var _action = __webpack_require__(24);
+var _action = __webpack_require__(26);
 
 var action = _interopRequireWildcard(_action);
 
-var _counter = __webpack_require__(25);
+var _counter = __webpack_require__(9);
 
 var _counter2 = _interopRequireDefault(_counter);
 

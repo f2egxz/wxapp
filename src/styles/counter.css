@@ -1,143 +1,158 @@
 /*-----common start-------*/
+
 page {
-	height: 100%;
+    height: 100%;
 }
 
 .fl {
-  float: left;
+    float: left;
 }
 
 .fr {
-  float: right;
+    float: right;
 }
 
-.clearfix:before,  .clearfix:after {
-  content: "";
-  display: table;
+.clearfix::before,
+.clearfix::after {
+    content: "";
+    display: table;
 }
-.clearfix:after {
-  clear: both;
+
+.clearfix::after {
+    clear: both;
 }
+
 .clearfix {
-  zoom: 1;
+    zoom: 1;
 }
+
 .line {
-	border:1rpx solid #f1f1f1;
+    border: 1rpx solid #f1f1f1;
 }
+
+
 /*-----common end-------*/
 
 
 /*-----index start-------*/
+
+
 /*-----index end-------*/
 
+
 /*-------payPage start---------*/
+
 .payPage {
-	height: 100%;
-	background-color: #eee;
+    height: 100%;
+    background-color: #eee;
 }
 
 .P_content {
-	width: 650rpx;
-	background-color: #fff;
-	margin: 0 auto;
-	padding:0 50rpx 50rpx;
-	box-sizing: border-box;
+    width: 650rpx;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 0 50rpx 50rpx;
+    box-sizing: border-box;
 }
 
 .P_way {
-	background-color: #fbfbfb;
-	line-height: 40px;
-	margin: 0 -50rpx;
-	padding: 0 50rpx;
+    background-color: #fbfbfb;
+    line-height: 40px;
+    margin: 0 -50rpx;
+    padding: 0 50rpx;
 }
 
-
 .P_money {
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 20px;
-	height: 60px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    height: 60px;
 }
 
 .P_sign {
-	font-size: 30px;
-	margin-right: 10px; 
+    font-size: 30px;
+    margin-right: 10px;
 }
 
 .P_input {
-	font-size: 50px;
-	height: 50px;
+    font-size: 50px;
+    height: 50px;
 }
+
 
 /*-------payPage end---------*/
 
+
 /*-------paySuccess start--------*/
+
 .PS_paySuccess {
-	height: 100%;
-	background-color: #ddd;
+    height: 100%;
+    background-color: #ddd;
 }
 
 .PS_icon {
-	margin: 30px auto 0 ;
+    margin: 30px auto 0;
 }
 
 .PS_title {
-	padding: 10px;
-	text-align: center;
-	font-size: 22px;
+    padding: 10px;
+    text-align: center;
+    font-size: 22px;
 }
 
-.PS_money{
-	background-color: #fff;
-	border: 1px solid #ccc;
-	padding: 16px;
-	margin-bottom: 20px;
+.PS_money {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 20px;
 }
 
 
 /*-------paySuccess end--------*/
 
+
 /*--------signup start ------------*/
+
 .SU_signup {
-	position: relative;
-	height: 100%;
-	background-color:  #f0f0f0;
+    position: relative;
+    height: 100%;
+    background-color: #f0f0f0;
 }
 
 .SU_input {
-	position: relative;
+    position: relative;
     padding: 28rpx 0 28rpx 100rpx;
     background-color: #ffffff;
     font-size: 18px;
 }
 
 .SU_name {
-	float: left;
+    float: left;
     color: #6e6e6e;
-    margin:10rpx 22rpx 0 0;
+    margin: 10rpx 22rpx 0 0;
     font-size: 18px;
 }
 
 .SU_submit {
-	margin: 70rpx 36rpx;
+    margin: 70rpx 36rpx;
 }
 
 .SU_agreement {
-	margin-right:36rpx;
+    margin-right: 36rpx;
     text-align: right;
     font-size: 32rpx;
 }
 
 .SU_checkbox {
-	display: inline-block
+    display: inline-block
 }
 
 .SU_protocol {
-	color: #25e0a2;
+    color: #25e0a2;
     display: inline-block
 }
 
 .SU_text {
-	position: absolute;
+    position: absolute;
     bottom: 20rpx;
     left: 0rpx;
     width: 100%;
@@ -145,10 +160,10 @@ page {
 }
 
 .SU_getCoding {
-	position: absolute;
-    bottom:28rpx;
+    position: absolute;
+    bottom: 28rpx;
     right: 30rpx;
-    color:#00d495;
+    color: #00d495;
     border: 2rpx solid #00d495;
     border-radius: 8rpx;
     font-size: 30rpx;
@@ -157,13 +172,170 @@ page {
 }
 
 .SU_getCoding:active {
-	background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .SU_icon {
-	 position: absolute;
+    position: absolute;
     top: 28rpx;
     left: 36rpx;
 }
 
+
 /*--------signup end ------------*/
+
+
+/*-------feedback start---------*/
+
+.FB_feedback {
+    background-color: #eee;
+    padding: 10px;
+    height: 100%;
+}
+
+.FB_textarea {
+    min-height: 4rem;
+    border: 1px solid #000;
+    background-color: #fff;
+    padding: 0.5rem;
+}
+
+.FB_text {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.FB_input {
+    border: 1px solid #000;
+    background-color: #fff;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+/*-------feedback end---------*/
+
+
+/* -------goods start----------- */
+.G_commodity {
+    height: 100%;
+    position: relative;
+}
+
+.G_scroll_view {
+    height: 100%;
+    padding-bottom: 41px;
+    box-sizing: border-box;
+}
+
+.G_image {
+    height: 250rpx;
+}
+
+.G_image>swiper {
+    height: 100%;
+}
+
+.G_image_item {
+    height: 100%;
+    width: 100%;
+}
+
+
+.G_message {
+    padding:34rpx;
+    color: #00d495;
+    font-size: 14px;
+}
+
+.G_company {
+    padding: 34rpx;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;   
+    min-height:30rpx;  
+}
+
+.G_tabTitle {
+    padding: 34rpx 0 ;
+    text-align: center;
+    font-size: 16px;
+}
+
+.G_tabTitle_fl {
+    border-right: 1px dashed #ddd;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.G_tabTitle_fr {
+    float: right;
+    width: 50%;
+}
+
+.G_showTab {
+    width: 50%;
+    height: 6rpx;
+    background-color: #00d495;
+}
+
+.G_artical_title {
+    padding: 26rpx 34rpx;
+    font-size:34rpx ;
+}
+
+.G_artical_icon {
+    float:left;
+    width: 10rpx;
+    height: 34rpx;
+    background: #02d397;
+}
+
+.G_bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top:1px solid #ddd;
+    height: 40px;
+    display: flex;
+}
+
+.G_btm_item {
+    flex: auto;
+    text-align: center
+}
+
+.G_btm_collect {
+    position: relative;
+}
+
+.G_btm_collect_item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%)
+}
+
+.G_btm_buy {
+    background-color: #00d495;
+}
+
+.G_buy_nav {
+    width: 100%;
+    height: 40PX;
+    line-height: 40PX;
+    color: #fff;
+    font-size: 18px;
+}
+.G_notice {
+    padding: 34rpx;
+}
+
+.G_notice_container {
+    border-top:1px solid #ddd;
+}
+.G_notice_container view {
+    font-size: 14px;
+}
+/* -------goods end----------- */

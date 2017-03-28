@@ -1,0 +1,68 @@
+<!-- style: G -->
+<view class="{{style.G_commodity}}">
+    <scroll-view scroll-y class="{{style.G_scroll_view}}">
+        <view class="{{style.G_image}}">
+            <swiper indicator-dots="{{true}}" autoplay="{{true}}">
+              <block wx:for="{{imgUrls}}" wx:key="item">
+                <swiper-item>
+                  <image src="{{item}}" class="{{style.G_image_item}}"/>
+                </swiper-item>
+              </block>
+            </swiper>
+        </view>
+        <view class="{{style.G_message}}">
+            <text>{{payType==="gold"?'金币':'积分'}}{{price}}</text>
+            <text class="{{style.fr}}">已兑{{hasConversion}}/{{conversion}}</text>
+        </view>
+        <view class="{{style.G_company}}">
+            <text>{{company}}</text>
+            <icon type="download" size="23" class="{{style.fr}}" bindtap = "call"/>
+        </view>
+
+        <view>
+            <view class="{{style.clearfix}}">
+                <view class="{{style.G_tabTitle}} {{style.G_tabTitle_fl}}"  bindtap="showIntroduce">商品介绍</view>
+                <view class="{{style.G_tabTitle}} {{style.G_tabTitle_fr}}" bindtap="showDetails">商家详情</view>
+            </view>
+            <view class="{{style.clearfix}}">
+                <view class="{{style.G_showTab}} {{style.fl}}" hidden="{{showTab !=='introduce'}}"></view>
+                <view class="{{style.G_showTab}} {{style.fr}}" hidden="{{showTab !=='details'}}"></view>
+            </view>
+            <view class="{{style.G_introduce}}" hidden="{{showTab !=='introduce'}}" >
+                <view wx:for="{{introduceContent}}" wx:for-item="i"  wx:key="{{i}}">
+                    {{i}}
+                </view> 
+            </view>
+            <view class="{{style.G_details}}" hidden="{{showTab !=='details'}}">
+                <view wx:for="{{detailsContent}}" wx:for-item="i" wx:key="{{i}}">
+                    {{i}}
+                </view> 
+            </view>
+            <view class="{{style.G_notice}}">
+                <view class="{{style.G_artical_title}}">
+                    <view class="{{style.G_artical_icon}}"></view>
+                    <text class="{{style.G_artical_fl}}">兑换须知</text>
+                </view>
+                <view class="{{style.G_notice_container}}">
+                    <view>兑换方式：{{notice.way}}</view>
+                    <view>有效期期：{{notice.startTime}}至{{notice.endTime}}</view>
+                    <view>使用规则：{{notice.rule}}</view>
+                </view>
+            </view>
+        </view>
+
+
+
+
+    </scroll-view>
+    <view class="{{style.G_bottom}}">
+        <view class="{{style.G_btm_item}} {{style.G_btm_collect}}" bindtap="bindcollect">
+            <icon type="success_circle" class="{{style.G_btm_collect_item}}" hidden="{{collect===true}}"></icon>
+            <icon type="success" class="{{style.G_btm_collect_item}}" hidden="{{collect !== true}}"></icon>
+        </view>
+        <view class="{{style.G_btm_item}} {{style.G_btm_buy}}">
+            <navigator url="" class="{{style.G_buy_nav}}">立即兑换</navigator>
+        </view>
+    </view>
+
+</view>

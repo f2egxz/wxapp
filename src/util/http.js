@@ -88,11 +88,11 @@
     //   .catch(options.fail||function(response){console.log(response)})
     // return this
   // }
-  if(typeof wx ==='object'){
+  // if(typeof wx ==='object'){
     wx.request(options)
-  }else{
+  // }else{
     // fetch(options)
-  }
+  // }
 }
 // http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 

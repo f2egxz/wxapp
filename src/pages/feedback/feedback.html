@@ -1,0 +1,16 @@
+<!-- styles: FB -->
+
+<view class="{{style.FB_feedback}}">
+	我的建议
+	<view class="{{style.FB_textarea}}">
+		<textarea auto-height placeholder="最多可输入200个字" maxlength='200' cursor-spacing='100' value="{{message}}" focus bindinput="bindmsg"/>
+	</view>
+	<view class="{{style.FB_text}}">
+		您的建议是我们前进的动力，真诚的感谢您的反馈
+	</view>
+	联系方式
+	<view class="{{style.FB_input}}">
+		<input placeholder="请输入手机号" cursor-spacing='80' type="number" value="{{tel}}" bindinput="bindtel" />
+	</view>
+	<button type="primary" size="default"  bindtap="bindSubmit" hover-class="custom-button-hover-class" formType="submit">提交</button>
+</view>

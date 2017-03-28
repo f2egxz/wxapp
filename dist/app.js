@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("lib/wxapp-redux"), require("lib/redux-logger"), require("lib/redux-thunk")) : factory(root["lib/wxapp-redux"], root["lib/redux-logger"], root["lib/redux-thunk"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_30__, __WEBPACK_EXTERNAL_MODULE_37__, __WEBPACK_EXTERNAL_MODULE_38__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_32__, __WEBPACK_EXTERNAL_MODULE_41__, __WEBPACK_EXTERNAL_MODULE_42__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -73,11 +73,66 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "//";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
+
+var _createStore = __webpack_require__(3);
+
+var _createStore2 = _interopRequireDefault(_createStore);
+
+var _combineReducers = __webpack_require__(13);
+
+var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
+var _bindActionCreators = __webpack_require__(12);
+
+var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+
+var _applyMiddleware = __webpack_require__(11);
+
+var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+
+var _compose = __webpack_require__(2);
+
+var _compose2 = _interopRequireDefault(_compose);
+
+var _warning = __webpack_require__(4);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/*
+* This is a dummy function to check if the function name has been altered by minification.
+* If the function has been minified and NODE_ENV !== 'production', warn the user.
+*/
+function isCrushed() {}
+
+if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+  (0, _warning2.default)('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+}
+
+exports.createStore = _createStore2.default;
+exports.combineReducers = _combineReducers2.default;
+exports.bindActionCreators = _bindActionCreators2.default;
+exports.applyMiddleware = _applyMiddleware2.default;
+exports.compose = _compose2.default;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -264,7 +319,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -310,7 +365,7 @@ function compose() {
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,7 +384,7 @@ var _isPlainObject = __webpack_require__(6);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _symbolObservable = __webpack_require__(20);
+var _symbolObservable = __webpack_require__(22);
 
 var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -582,7 +637,7 @@ function createStore(reducer, preloadedState, enhancer) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -615,61 +670,6 @@ function warning(message) {
 }
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
-
-var _createStore = __webpack_require__(2);
-
-var _createStore2 = _interopRequireDefault(_createStore);
-
-var _combineReducers = __webpack_require__(11);
-
-var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-var _bindActionCreators = __webpack_require__(10);
-
-var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
-
-var _applyMiddleware = __webpack_require__(9);
-
-var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
-
-var _compose = __webpack_require__(1);
-
-var _compose2 = _interopRequireDefault(_compose);
-
-var _warning = __webpack_require__(3);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/*
-* This is a dummy function to check if the function name has been altered by minification.
-* If the function has been minified and NODE_ENV !== 'production', warn the user.
-*/
-function isCrushed() {}
-
-if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
-  (0, _warning2.default)('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
-}
-
-exports.createStore = _createStore2.default;
-exports.combineReducers = _combineReducers2.default;
-exports.bindActionCreators = _bindActionCreators2.default;
-exports.applyMiddleware = _applyMiddleware2.default;
-exports.compose = _compose2.default;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -680,7 +680,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _root = __webpack_require__(18);
+var _root = __webpack_require__(20);
 
 var _root2 = _interopRequireDefault(_root);
 
@@ -702,15 +702,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _baseGetTag = __webpack_require__(12);
+var _baseGetTag = __webpack_require__(14);
 
 var _baseGetTag2 = _interopRequireDefault(_baseGetTag);
 
-var _getPrototype = __webpack_require__(14);
+var _getPrototype = __webpack_require__(16);
 
 var _getPrototype2 = _interopRequireDefault(_getPrototype);
 
-var _isObjectLike = __webpack_require__(19);
+var _isObjectLike = __webpack_require__(21);
 
 var _isObjectLike2 = _interopRequireDefault(_isObjectLike);
 
@@ -814,9 +814,6 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 // import fetch from 'isomorphic-fetch'
 
 /*
@@ -905,11 +902,11 @@ function http(options) {
   //   .catch(options.fail||function(response){console.log(response)})
   // return this
   // }
-  if ((typeof wx === 'undefined' ? 'undefined' : _typeof(wx)) === 'object') {
-    wx.request(options);
-  } else {
-    // fetch(options)
-  }
+  // if(typeof wx ==='object'){
+  wx.request(options);
+  // }else{
+  // fetch(options)
+  // }
 }
 // http.prototype.request = typeof wx==="undefined"?fetch:wx.request//这个是传进来的，什么环境下传入它对应的request方法
 
@@ -917,7 +914,9 @@ function http(options) {
 exports.default = http;
 
 /***/ }),
-/* 9 */
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -928,7 +927,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = applyMiddleware;
 
-var _compose = __webpack_require__(1);
+var _compose = __webpack_require__(2);
 
 var _compose2 = _interopRequireDefault(_compose);
 
@@ -990,7 +989,7 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1052,7 +1051,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1063,13 +1062,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = combineReducers;
 
-var _createStore = __webpack_require__(2);
+var _createStore = __webpack_require__(3);
 
 var _isPlainObject = __webpack_require__(6);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _warning = __webpack_require__(3);
+var _warning = __webpack_require__(4);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -1200,10 +1199,10 @@ function combineReducers(reducers) {
     return hasChanged ? nextState : state;
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1217,11 +1216,11 @@ var _Symbol2 = __webpack_require__(5);
 
 var _Symbol3 = _interopRequireDefault(_Symbol2);
 
-var _getRawTag = __webpack_require__(15);
+var _getRawTag = __webpack_require__(17);
 
 var _getRawTag2 = _interopRequireDefault(_getRawTag);
 
-var _objectToString = __webpack_require__(16);
+var _objectToString = __webpack_require__(18);
 
 var _objectToString2 = _interopRequireDefault(_objectToString);
 
@@ -1251,7 +1250,7 @@ function baseGetTag(value) {
 exports.default = baseGetTag;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1270,7 +1269,7 @@ exports.default = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1280,7 +1279,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _overArg = __webpack_require__(17);
+var _overArg = __webpack_require__(19);
 
 var _overArg2 = _interopRequireDefault(_overArg);
 
@@ -1292,7 +1291,7 @@ var getPrototype = (0, _overArg2.default)(Object.getPrototypeOf, Object);
 exports.default = getPrototype;
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1354,7 +1353,7 @@ function getRawTag(value) {
 exports.default = getRawTag;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1387,7 +1386,7 @@ function objectToString(value) {
 exports.default = objectToString;
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1413,7 +1412,7 @@ function overArg(func, transform) {
 exports.default = overArg;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1425,7 +1424,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _freeGlobal = __webpack_require__(13);
+var _freeGlobal = __webpack_require__(15);
 
 var _freeGlobal2 = _interopRequireDefault(_freeGlobal);
 
@@ -1440,7 +1439,7 @@ var root = _freeGlobal2.default || freeSelf || Function('return this')();
 exports.default = root;
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1483,16 +1482,16 @@ function isObjectLike(value) {
 exports.default = isObjectLike;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(21);
+module.exports = __webpack_require__(23);
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1502,7 +1501,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ponyfill = __webpack_require__(22);
+var _ponyfill = __webpack_require__(24);
 
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -1526,10 +1525,10 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(25)(module)))
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1558,7 +1557,7 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1588,7 +1587,7 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1729,8 +1728,6 @@ function payStartHttp(reqError) {
 }
 
 /***/ }),
-/* 25 */,
-/* 26 */,
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1758,6 +1755,222 @@ function randomString(n) {
 
 /***/ }),
 /* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ActionType = undefined;
+exports.Message = Message;
+exports.Tel = Tel;
+exports.Submit = Submit;
+
+var _http = __webpack_require__(8);
+
+var _http2 = _interopRequireDefault(_http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ActionType = exports.ActionType = {
+  MESSAGE: 'message',
+  TEL: 'tel',
+  SUBMIT: 'submit',
+  SUBMITSUCC: 'submit_success',
+  SUBMITFAIL: 'submit_fail'
+};
+
+// 输入的留言信息
+function Message(value) {
+  return {
+    type: ActionType.MESSAGE,
+    payload: value
+  };
+}
+
+// 输入的电话号码
+function Tel(value) {
+  return {
+    type: ActionType.TEL,
+    payload: value
+  };
+}
+
+// 提交表单
+function Submit(errorMsg, submitSuccess, submitFail) {
+  return function (dispatch, getState) {
+    var _getState$feedback = getState().feedback,
+        message = _getState$feedback.message,
+        tel = _getState$feedback.tel;
+
+    var phoneRegExp = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+
+    if (message.trim() === '') {
+      errorMsg('请输入建议！');
+      return;
+    }
+
+    if (!phoneRegExp.test(tel)) {
+      errorMsg('请输入正确的手机号！');
+      return;
+    }
+
+    dispatch({ type: ActionType.SUBMIT });
+    (0, _http2.default)({
+      url: '',
+      data: {
+        messages: message,
+        phoneNum: tel
+      },
+      success: function success(response) {
+        if (response.success) {
+          dispatch({ type: ActionType.SUBMITSUCC });
+          submitSuccess();
+        } else {
+          dispatch({ type: ActionType.SUBMITFAIL });
+          submitFail();
+        }
+      },
+      fail: function fail() {
+        dispatch({ type: ActionType.SUBMITFAIL });
+        submitFail();
+      }
+    });
+  };
+}
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ActionType = undefined;
+exports.showIntroduce = showIntroduce;
+exports.showDetails = showDetails;
+exports.collect = collect;
+exports.payStartHttp = payStartHttp;
+
+var _http = __webpack_require__(8);
+
+var _http2 = _interopRequireDefault(_http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ActionType = exports.ActionType = {
+
+  SHOWINTRODUCE: "showIntroduce",
+  SHOWDETAILS: "showDetails",
+  COLLECTION: "collect",
+  HTTPREQ: "http_requert",
+  HTTPREQ_SUCCESS: "http_requert_success",
+  HTTPREQ_ERROR: "http_requert_error"
+};
+
+// 展示
+function showIntroduce() {
+  return {
+    type: ActionType.SHOWINTRODUCE
+  };
+}
+
+function showDetails() {
+  return {
+    type: ActionType.SHOWDETAILS
+  };
+}
+
+function collect(suc) {
+  return function (dispatch, getState) {
+    var _getState$goods = getState().goods,
+        collect = _getState$goods.collect,
+        httpreq = _getState$goods.httpreq;
+
+    if (!httpreq) {
+      dispatch({
+        type: ActionType.HTTPREQ
+      });
+      (0, _http2.default)({
+        url: "",
+        success: function success(res) {
+          dispatch({
+            type: ActionType.HTTPREQ_SUCCESS,
+            payload: {
+              httpreq: false
+            }
+          });
+          if (res.success) {
+            suc();
+            dispatch({
+              type: ActionType.COLLECTION,
+              payload: !collect
+            });
+          }
+        },
+        fail: function fail(res) {
+          dispatch({
+            type: ActionType.HTTPREQ_ERROR,
+            payload: {
+              httpreq: false
+            }
+          });
+        }
+      });
+    }
+  };
+};
+
+var payStartREQ_SUCCESS = function payStartREQ_SUCCESS(response) {
+  var payloadObj = Object.assign({}, response, {
+    httpreq: false
+  });
+  return {
+    type: ActionType.HTTPREQ_SUCCESS,
+    payload: payloadObj
+  };
+};
+
+function payStartREQ_ERROR(reqError) {
+  return function (dispatch) {
+    reqError();
+    dispatch({
+      type: ActionType.HTTPREQ_ERROR,
+      payload: {
+        httpreq: false
+      }
+    });
+  };
+}
+
+function payStartHttp(reqError) {
+  return function (dispatch) {
+    dispatch({
+      type: ActionType.HTTPREQ
+    });
+    return (0, _http2.default)({
+      url: '',
+      success: function success(response) {
+        if (response.success) {
+          dispatch(payStartREQ_SUCCESS(response));
+        } else {
+          dispatch(payStartREQ_ERROR(reqError));
+        }
+      },
+      fail: function fail(response) {
+        return dispatch(payStartREQ_ERROR(reqError));
+      }
+    });
+  };
+}
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1904,11 +2117,18 @@ function submint(msg, errorMsg, submitSuccess, submitError) {
 		(0, _http2.default)({
 			url: '',
 			method: 'POST',
-			success: function success() {
-				dispatch({
-					type: ActionType.SUBMITSUCCESS
-				});
-				submitSuccess();
+			success: function success(response) {
+				if (response.success) {
+					dispatch({
+						type: ActionType.SUBMITSUCCESS
+					});
+					submitSuccess();
+				} else {
+					dispatch({
+						type: ActionType.SUBMITFAIL
+					});
+					submitError();
+				}
 			},
 			fail: function fail() {
 				dispatch({
@@ -1928,7 +2148,7 @@ function checkedBox() {
 }
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1938,13 +2158,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(4);
+var _redux = __webpack_require__(0);
 
-var _reducers = __webpack_require__(34);
+var _reducers = __webpack_require__(38);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _middlewares = __webpack_require__(31);
+var _middlewares = __webpack_require__(33);
 
 var _middlewares2 = _interopRequireDefault(_middlewares);
 
@@ -1955,13 +2175,13 @@ var enhancer = (0, _redux.compose)(_middlewares2.default);
 exports.default = (0, _redux.createStore)(_reducers2.default, enhancer);
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_30__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_32__;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1971,13 +2191,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _redux = __webpack_require__(4);
+var _redux = __webpack_require__(0);
 
-var _reduxThunk = __webpack_require__(38);
+var _reduxThunk = __webpack_require__(42);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxLogger = __webpack_require__(37);
+var _reduxLogger = __webpack_require__(41);
 
 var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
@@ -1989,7 +2209,7 @@ var en = _redux.compose;
 exports.default = en((0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)()));
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2007,7 +2227,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2041,7 +2261,7 @@ exports.default = function () {
   }
 };
 
-var _action = __webpack_require__(24);
+var _action = __webpack_require__(26);
 
 var initState = exports.initState = {
   value: 5,
@@ -2050,45 +2270,7 @@ var initState = exports.initState = {
 };
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(4);
-
-var _app = __webpack_require__(32);
-
-var _app2 = _interopRequireDefault(_app);
-
-var _counter = __webpack_require__(33);
-
-var _counter2 = _interopRequireDefault(_counter);
-
-var _pay = __webpack_require__(35);
-
-var _pay2 = _interopRequireDefault(_pay);
-
-var _signup = __webpack_require__(36);
-
-var _signup2 = _interopRequireDefault(_signup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-  app: _app2.default,
-  counter: _counter2.default,
-  pay: _pay2.default,
-  signup: _signup2.default
-});
-
-/***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2099,9 +2281,192 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.initState = undefined;
 
-var _redux = __webpack_require__(4);
+var _redux = __webpack_require__(0);
 
-var _action = __webpack_require__(24);
+var _feedbackAction = __webpack_require__(28);
+
+var initState = exports.initState = {
+	message: '',
+	tel: '',
+	http: false,
+	response: ''
+};
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
+	var action = arguments[1];
+	var type = action.type,
+	    payload = action.payload;
+
+	switch (type) {
+		// 留言信息
+		case _feedbackAction.ActionType.MESSAGE:
+			return Object.assign({}, state, {
+				message: payload
+			});
+		//电话号码 
+		case _feedbackAction.ActionType.TEL:
+			return Object.assign({}, state, {
+				tel: payload
+			});
+		//提交表单 
+		case _feedbackAction.ActionType.SUBMIT:
+			return Object.assign({}, state, {
+				http: true
+			});
+		case _feedbackAction.ActionType.SUBMITSUCC:
+			return Object.assign({}, state, {
+				http: false,
+				response: true
+			});
+		case _feedbackAction.ActionType.SUBMITFAIL:
+			return Object.assign({}, state, {
+				message: '',
+				tel: '',
+				http: false,
+				response: false
+			});
+		default:
+			return state;
+	}
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.initState = undefined;
+
+var _redux = __webpack_require__(0);
+
+var _goodsAction = __webpack_require__(29);
+
+var initState = exports.initState = {
+	payType: "gold", //integral,gold
+	imgUrls: ['./../../static/images/test1.jpg', './../../static/images/test2.jpg', './../../static/images/test1.jpg'],
+	price: 0, //每个的价钱
+	hasConversion: 0, //已兑
+	conversion: 0, //共多少件
+	company: "", //公司名
+	phoneNumber: "18810630121", //公司电话
+	introduceContent: ["1111", '111'], //商品介绍的内容
+	detailsContent: ["2222", '22'], //商家信息的内容
+	notice: { //兑换须知
+		way: "",
+		startTime: "",
+		endTime: "",
+		rule: ""
+	},
+	showTab: "introduce", //details,introduce 显示的菜单栏
+	collect: false, //收藏
+	httpreq: false };
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
+	var action = arguments[1];
+	var type = action.type,
+	    payload = action.payload;
+
+	switch (type) {
+		// 切换显示Tab 商品介绍
+		case _goodsAction.ActionType.SHOWINTRODUCE:
+			return Object.assign({}, state, {
+				showTab: "introduce"
+			});
+		case _goodsAction.ActionType.SHOWDETAILS:
+			return Object.assign({}, state, {
+				showTab: "details"
+			});
+		// 切换显示Tab 商家详情
+		case _goodsAction.ActionType.COLLECTION:
+			return Object.assign({}, state, {
+				collect: payload
+			});
+		// httpreq是否正在发送 
+		case _goodsAction.ActionType.HTTPREQ:
+			return Object.assign({}, state, {
+				httpreq: true
+			});
+		case _goodsAction.ActionType.HTTPREQ_SUCCESS:
+			return Object.assign({}, state, payload);
+
+		case _goodsAction.ActionType.HTTPREQ_ERROR:
+			return Object.assign({}, state, payload);
+
+		default:
+			return state;
+	}
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(0);
+
+var _app = __webpack_require__(34);
+
+var _app2 = _interopRequireDefault(_app);
+
+var _counter = __webpack_require__(35);
+
+var _counter2 = _interopRequireDefault(_counter);
+
+var _pay = __webpack_require__(39);
+
+var _pay2 = _interopRequireDefault(_pay);
+
+var _signup = __webpack_require__(40);
+
+var _signup2 = _interopRequireDefault(_signup);
+
+var _feedback = __webpack_require__(36);
+
+var _feedback2 = _interopRequireDefault(_feedback);
+
+var _goods = __webpack_require__(37);
+
+var _goods2 = _interopRequireDefault(_goods);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  app: _app2.default,
+  counter: _counter2.default,
+  pay: _pay2.default,
+  signup: _signup2.default,
+  feedback: _feedback2.default,
+  goods: _goods2.default
+});
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.initState = undefined;
+
+var _redux = __webpack_require__(0);
+
+var _action = __webpack_require__(26);
 
 var initState = exports.initState = {
 	payWay: "funds",
@@ -2160,7 +2525,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 36 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2171,7 +2536,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.initState = undefined;
 
-var _signupAction = __webpack_require__(28);
+var _signupAction = __webpack_require__(30);
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2236,29 +2601,29 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_37__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_41__;
 
 /***/ }),
-/* 38 */
+/* 42 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_38__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_42__;
 
 /***/ }),
-/* 39 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _store = __webpack_require__(29);
+var _store = __webpack_require__(31);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _wxappRedux = __webpack_require__(30);
+var _wxappRedux = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for reducers/pay.js</title>
+    <title>Code coverage report for reducers/feedback.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="..\prettify.css" />
     <link rel="stylesheet" href="..\base.css" />
@@ -16,18 +16,18 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\index.html">All files</a> / <a href="index.html">reducers</a> pay.js
+      <a href="..\index.html">All files</a> / <a href="index.html">reducers</a> feedback.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/8</span>
+        <span class='fraction'>6/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>9/9</span>
       </div>
     </div>
   </div>
@@ -87,18 +87,7 @@
 42
 43
 44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+45</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,11 +99,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -131,8 +117,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,69 +130,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { combineReducers } from 'redux';
-import { ActionType }	   from "../actions/action"
+import { ActionType }	   from "../actions/feedbackAction"
 &nbsp;
 &nbsp;
 export const initState = {
-	payWay:"funds",
-	chargeMoney:'',
-	balance:100,
-	verify:false,
-	StartHttp:false,
-	ratio:5,
-	userName: ''
+	message:'',
+	tel:'',
+	http:false,
+	response:''
 };
 &nbsp;
-export default (state = <span class="branch-0 cbranch-no" title="branch not covered" >initState,</span> action) =&gt; {
+export default (state=<span class="branch-0 cbranch-no" title="branch not covered" >initState,</span>action)=&gt;{
 	const { type, payload } = action
-	switch (type){
-		// 设置支付方式
-		case ActionType.PAYWAY:
+	switch(type){
+		// 留言信息
+		case  ActionType.MESSAGE :
 			return Object.assign({},state,{
-				payWay:payload
+				message: payload
 			});
-		// 设置充值金额
-		case ActionType.CHANGEMONEY:
+		//电话号码 
+		case ActionType.TEL :
 			return Object.assign({},state,{
-				chargeMoney:payload
+				tel: payload
 			});
-		// 设置是否完成验证(验证是否有足够的余额)
-		case ActionType.VERIFY:
+		//提交表单 
+		case ActionType.SUBMIT:
 			return Object.assign({},state,{
-				verify:payload,
-				chargeMoney:'',
-			});
-		// 页面加载后发送的请求
-		case ActionType.HTTPREQ:
-			return Object.assign({},state,{
-				StartHttp:true,
-			});
-		// 页面加载时的请求成功
-		case ActionType.HTTPREQ_SUCCESS:
-			return Object.assign({},state,{
-				StartHttp:false,
-				ratio:payload.ratio,
-				userName: payload.userName
-			});
-		// 页面加载时的请求失败
-		case ActionType.HTTPREQ_ERROR:
-			return Object.assign({},state,{
-				StartHttp:false,
-				ratio:'*'
+				http:true
 			})
-		default:
+		case ActionType.SUBMITSUCC:
+			return Object.assign({},state,{
+				http:false,
+				response:true
+			})
+		case ActionType.SUBMITFAIL:
+			return Object.assign({},state,{
+				message:'',
+				tel:'',
+				http:false,
+				response:false
+			})
+		default :
 			return state;
 	}
-};
-&nbsp;</pre></td></tr>
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
